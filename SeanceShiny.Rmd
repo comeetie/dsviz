@@ -1,0 +1,147 @@
+---
+title: "Visualisation, </br>Shiny"
+author: "Etienne Côme"
+date: "17 Janvier 2020"
+output:
+  revealjs::revealjs_presentation:
+    theme: white
+    transition: none
+    self_contained: true
+    css: slides.css
+  beamer_presentation:
+    toc: false
+    incremental: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+## Shiny
+<link href="https://fonts.googleapis.com/css?family=Armata&display=swap" rel="stylesheet">
+
+- Interface interactive / dashboard 
+- Assez facile à mettre en oeuvre
+- Tout en R
+- Debuggage parfois délicat car // javascript-html
+- Nécessite un serveur shiny pour être déployé 
+
+
+## Shiny
+### 2 composants
+
+- <span class="green">UI : décrit l'interface</span>
+  - création de la mise en page
+  - des bouttons, sliders, plots,... 
+- <span class="red">Server : décrit la logique applicative </span>
+  - effectue les traitements 
+  - définie comment l'interface se mets à jours lorsque les entrées changent
+  - fait donc le liens entres des entrées (inputs) et des sorties (outputs)
+
+## <span class="green">UI</span>
+
+```{r, eval=FALSE,echo=TRUE}
+ui <- fluidPage(
+    # Application title
+    titlePanel("Old Faithful Geyser Data"),
+    # Sidebar with a slider input for number of bins 
+    sidebarLayout(
+        sidebarPanel(
+            sliderInput(inputId = "bins", label = "Number of bins:", 
+                        min = 1, max = 50, value = 30)
+        ),
+        # Show a plot of the generated distribution
+        mainPanel(plotOutput(outputId = "distPlot"))
+    )
+)
+```
+
+## <span class="green">UI</span>
+
+
+### Différents composants :
+
+- mise en page : page, layout, panel
+- inputs : actionButton, dateInput, actionLink, sliderInput, radioButtons,...
+- outputs : plotOutput, dataTableOutput, ... + leaflet
+
+voir la cheat sheet pour plus de détails
+
+### ! inputId, outputId
+- permet de référencer les entrées sorties
+- fait le liens avec le code server
+
+## <span class="red">Server</span>
+```{r, eval=FALSE,echo=TRUE}
+# fait le liens entre input et output
+server <- function(input, output) {
+
+    output$distPlot <- renderPlot({
+        # generate bins based on input$bins from ui.R
+        x    <- faithful[, 2]
+        bins <- seq(min(x), max(x), length.out = input$bins + 1)
+
+        # draw the histogram with the specified number of bins
+        hist(x, breaks = bins, col = 'darkgray', border = 'white')
+    })
+}
+```
+
+## <span class="red">Server</span>
+
+### Partie réactives :
+- renderPlot, renderImage,renderTable, ...
+
+Le bloc sera ré-éxecuter a chaque fois que l'un des inputs qu'il mobilise est modifié.
+
++ voir la cheat sheet pour plus de détails
+
+
+## <span class="red">Server, réactivité avancée</span>
+structurer l'execution réactive pour éviter de dupliquer des traitements :
+```{r, eval=FALSE,echo=TRUE}
+data = reactive({})
+data()
+```
+
+## <span class="red">Server, réactivité avancée</span>
+Structurer l'execution réactive pour éviter de dupliquer des traitements :
+
+- reactive : bloc réactif retournant une expression reactive
+- observe : bloc réactif ne retournant rien (effet de bord i/o)
+
+```{r, eval=FALSE,echo=TRUE}
+data = reactive({})
+data()
+renderPlot(data())
+observe({
+  input$saveButton 
+  write.csv(data())  
+})
+```
+
+## <span class="red">Server, réactivité avancée</span>
+Isoler une partie du code :
+```{r, eval=FALSE,echo=TRUE}
+observe({
+  input$saveButton  # Do take a dependency on input$saveButton
+
+  # isolate a whole block
+  data <- isolate({
+    a <- input$valueA   # No dependency on input$valueA or input$valueB
+    b <- input$valueB
+    c(a=a, b=b)
+  })
+  writeToDatabase(data)
+})
+```
+
+
+## <span class="red">Server, réactivité avancée</span>
+Executer un bloc de manière conditionel au changement d'un ou de plusieur inputs
+```{r, eval=FALSE,echo=TRUE}
+data = eventReactive(input,{})
+data()
+observeEvent(input,{}})
+```
