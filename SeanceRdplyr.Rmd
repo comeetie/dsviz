@@ -1,7 +1,7 @@
 ---
 title: "Data Science et visualisation</br> R et dplyr"
 author: "Etienne Côme"
-date: "21 novembre 2019"
+date: "23 Septembre 2020"
 output:
   revealjs::revealjs_presentation:
     theme: white
@@ -26,8 +26,14 @@ knitr::opts_chunk$set(echo = FALSE)
 <li> éco-système vivant : beaucoup de packages 
 <li> <span class="red">! plutôt permisif</span> 
 <li> <a href="http://cran.r-project.org/doc/contrib/Lam-IntroductionToR_LHL.pdf">http://cran.r-project.org/doc/contrib/Lam-IntroductionToR_LHL.pdf</a>
+<li> environement de travail efficace rstudio
+<li> aide : ?nomdelafonction
 <li> ...
 </ul>
+
+## Rstudio
+<img src="./images/rstudio.png" width="800px">
+https://learnr-examples.shinyapps.io/ex-setup-r/
 
 ## Les types de base
 les vecteurs :
@@ -42,6 +48,7 @@ class(b)
 <ul>
 <li>permet de stocker des éléments de même type
 <li>opérations de bases c, length, seq, rep, indexation logique
+<li> numérotation commence à 1!
 </ul>
 
 ## Les types de base
@@ -49,18 +56,24 @@ les vecteurs, manipulations de bases :
 ```{r, echo=TRUE}
 length(a)
 a[1:2]
-i = 1:2;a[i]
+i = 1:2;
+a[i]
+i = (b=="g")
+b[i]
+```
+
+
+## Les types de base
+les vecteurs, manipulations de bases :
+```{r, echo=TRUE}
 i = seq(1,length(b),2);b[i]
 i = rep(1,5);b[i]
 i = rep(c(1,2),5);b[i]
 i = rep(c(1,2),each=3);b[i]
-i = (b=="g");b[i]
 ```
 
 
-
-## Les types de base
-<h4>les facteurs :</h4>
+## Les types de base, les facteurs :
 les vecteurs, manipulations de bases :
 ```{r, echo=TRUE}
 b = c("a","g","t","t","c","g","g")
@@ -69,9 +82,9 @@ levels(c)
 unclass(c)
 ```
 <ul>
-<li>type particulier de vecteurs pour coder des catégories "les niveaux (levels)"
+<li>type particulier de vecteurs pour coder des variables catégorielles "les niveaux (levels)"
 <li>opérations de bases c, length, levels, unclass
-<li><span class="red">! interprétation des chaines de caractères comme des facteurs lors de la création d'une data.frame, cf option stringAsFactor</span>
+<li><span class="red">! interprétation des chaines de caractères comme des facteurs lors de la création d'une data.frame</span>
 </ul>
 
 
@@ -110,7 +123,7 @@ c[c[,1]=="a",]
 ## Les types de base
 <h4>Les arrays :</h4>
 
-```{r, echo=TRUE}
+```{r, echo=TRUE, eval=FALSE}
 # tenseur de dimension 3
 a = array(runif(50),dim=c(5,5,2))
 a[1,,]
@@ -134,8 +147,8 @@ l[[2]]
 l = list(a=a,b=b,c=c)
 ```
 <ul>
-<li>permet de stocker des éléments de type différents
-<li>opérations de bases length
+<li>permet de stocker des éléments de types différents
+<li>opérations de bases length, c
 </ul>
 
 ## Les types de base
@@ -146,8 +159,8 @@ l$c
 l[[2]]
 ```
 <ul>
-<li>permet de stocker des éléments de type différents
-<li>opérations de bases length
+<li>permet de stocker des éléments de types différents
+<li>opérations de bases length, c
 </ul>
 
 
@@ -190,7 +203,14 @@ f(b=5,a=6)
 <li>argument nomé et valeur par défaut
 <li>pas besoin de return explicite
 </ul>
-
+## Lire des données
+<pre><code class="r">
+data = read.table("filename")
+data = read.csv("filename")
+library(readr)
+data = read_csv("filname")
+data = read_delim("filename")
+</pre></code>
 
 ## Les structures de contrôle
 ```{r, echo=TRUE,results='hide'}
@@ -206,6 +226,13 @@ for (i in 1:length(a)){a[i]=a[i]+5}
 t1=Sys.time()-t
 t1
 ```
+
+## Les structures de contrôle
+```{r, echo=TRUE,results='hide'}
+for (i in 1:length(a)){}
+while(i > 4){i=i-1}
+```
+<span class="red">! éviter les boucles for, while préférer les opérations vectorielle</span>
 
 <span class="green">Version vectorielle</span>
 ```{r, echo=TRUE}
@@ -266,6 +293,7 @@ r;class(r);dim(r)
 b=list(v1=runif(5000),v2=rnorm(5000),v3=rbinom(5000,5,0.2))
 r=lapply(b,which.max)
 r;class(r)
+# simplification du résultat
 r=sapply(b,which.max)
 r;class(r)
 ```
@@ -294,64 +322,29 @@ class(r);head(r)
 ```
 
 
-## Jointure : merge, %in%, match
-
-
+## Match, %in%, setdiff, intersect
 ```{r, echo=TRUE}
-a=data.frame(id=1:500,val1=runif(500))
-b=data.frame(id=sample(500,500),val2=runif(500))
-
-# jointure par colonne de même nom
-c=merge(a,b)
-
-# recherche des indices de correspondances
-match(a$id,b$id)[1:10]
-
-# jointure manuelle
-d=cbind(a,b$val2[match(a$id,b$id)])
-sum(d!=c)
-```
-## Jointure : merge, %in%, match
-
-
-```{r, echo=TRUE}
-# matching multiples 
-b=data.frame(id=sample(500,1000,replace=T),val2=runif(1000))
-length(match(a$id,b$id))
-length(match(b$id,a$id))
-head(a$id %in% b$id)
-length(a$id %in% b$id)
-c=merge(a,b)
-dim(c)
-c=merge(a,b,all.x=T)
-dim(c)
+a = 10:100
+b = 50:110
+setdiff(a,b)
+intersect(a,b)
+a %in% b
 ```
 
-## Aggrégation : tapply, by, aggregate
-
+## Match, %in%, setdiff, intersect
 ```{r, echo=TRUE}
-a=data.frame(id=1:500,val1=runif(500),val2=factor(rbinom(500,5,0.4)))
-aggregate(a$val1,list(a$val2),sum)
-
-```
-## Aggrégation : tapply, by, aggregate
-
-```{r, echo=TRUE}
-tapply(a$val1,list(a$val2),summary)
+a = 10:100
+b = 50:110
+a %in% b
+match(a,b)
 ```
 
-
-## Aggrégation : tapply, by, aggregate
-
-```{r, echo=TRUE}
-by(a$val1,list(a$val2),summary)
-```
 
 ## Comptage : table
 ```{r, echo=TRUE}
-table(a$val2)
-a$val3=rep(c("a","t","g","c"),500/4)
-table(a[,c('val2','val3')])
+data = data.frame(v1=rep(c("a","t","g","c"),500/4),v2=rbinom(500,10,0.4))
+table(data$v1)
+table(data[,c('v1','v2')])
 ```
 
 
@@ -409,30 +402,40 @@ data %>% pull(v3)
 ## <span class="green">dplyr,tidyr</span>
 <h2>Résumé "summarise"</h2>
 <pre><code class="r">data %&gt;% summarise(v1m=mean(v1))
-data %&gt;% count(v4)
 ...</pre></code>
 <h2>Avec des données groupées "group_by"</h2>
 <pre><code class="r">
 data %&gt;% group_by(group) %>% summarise(v1m=mean(v1))
 data %&gt;% group_by(group) %>% summarise(v1med=median(v1))
 ...</pre></code>
-
+Fonctuion d'aggregation : mean,median,n,sum,max,min,...
+Raccourci
+<pre><code class="r">
+data %&gt;% goup_by(v4) %>% summarize(n=n())
+data %&gt;% count(v4)
+...</pre></code>
 
 
 ## <span class="green">dplyr,tidyr</span>
-<h2>offset</h2>
+<h2>fonctions vectorielles</h2>
 <pre><code class="r"> 
-data1 %&gt;% left_join(data2)
-data1 %&gt;% right_join(data2)
-data1 %&gt;% inner_join(data2)
-data1 %&gt;% full_join(data2)
+data1 %&gt;% mutate(v2=cumsum(v1))
+data1 %&gt;% mutate(v2=if_else(v1==32,"a","b"))
+data1 %&gt;% mutate(v2=case_when(v1==32 ~ "a",v1==33 & v4<5 ~"b", TRUE ~ c))
 </pre></code>
 
+<h2>offset</h2>
+<pre><code class="r"> 
+data1 %&gt;% mutate(v2=lag(v1))
+data1 %&gt;% mutate(v2=lead(v4))
+</pre></code>
+
+! marche après un group_by pour modifier par groupes.
 
 ## <span class="green">dplyr,tidyr</span>
 <h2>jointure "X_join"</h2>
 <pre><code class="r"> 
-data1 %&gt;% left_join(data2, b=c("v1"="v2"))
+data1 %&gt;% left_join(data2, by=c("v1"="v2"))
 data1 %&gt;% right_join(data2)
 data1 %&gt;% inner_join(data2)
 data1 %&gt;% full_join(data2)
@@ -481,6 +484,20 @@ dflong
 ```
 
 ## <span class="green">dplyr,tidyr, exercices</span>
-<h2> Exercice 1 et 2 du TP GoT</h2>
+<h2> Exercice 1, 2 et 3 du TP GoT</h2>
 <a href="https://comeetie.github.io/got/got_tp.html">https://comeetie.github.io/got/got_tp.html</a>
 
+## Quiz
+
+<h1><a href="https://docs.google.com/forms/d/e/1FAIpQLSeTUPgka6POV7f8C2-rM5RittiEEe6cqFJpK39OBsQ06k8r_g/viewform?usp=sf_link"> Quiz à remplir obligatoirement</a></h1>
+
+## <span class="green">dplyr,tidyr, exercice supplémentaire</span>
+<h2>Prénoms</h2>
+Faire une carte représentant le prénoms masculin le plus fréquement donnés aux enfants nés en 2005 pour l'ensemble des départements français.
+Les données à utiliser sont disponnibles dans le répertoire data :
+
+- <a href="./Data/exo5_dep.csv">./Data/exo5_dep.csv : centroid des départements</a> 
+- <a href="./Data/exo5_dep.csv">./Data/exo5_prenoms.csv : Fichier des prenoms</a> 
+
+## <span class="green">dplyr,tidyr, exercice</span> {data-background=#ffffff}
+<img src='./images/prénomsmap.png' width="1000px">

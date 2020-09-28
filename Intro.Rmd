@@ -125,8 +125,8 @@ Graphiques, Data visualisation, Cartes...
 <li>manipuler des données en R avec dplyr  
 <li>introduction à la visualisation, bonnes pratiques & erreurs communes</li>
 <li>ggplot et la grammaire graphique </li>
+<li>données spatiales </li>
 <li>introduction à la cartographie </li>
-<li>données spatiale </li>
 </ul>
 
 

@@ -1,0 +1,61 @@
+.reveal .sourceCode.r .kw, .sourceCode.r .er {
+  color:inherit;
+  font-weight: normal;
+}
+.reveal .sourceCode.r .co {
+  font-style: normal;
+}
+
+.reveal .slides {
+  text-align: inherit;
+}
+
+.reveal .slide.level2 h1 {
+  font-size: 48px;
+}
+
+
+.reveal pre{
+  margin: auto;
+}
+.reveal pre code {
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+html{
+  font-family:armata;
+}
+.purple {
+  color: #9e9ac8;
+}
+
+.blue {
+  color: #6baed6;
+}
+
+.red{
+  color:#dd5555;
+}
+
+.grey {
+  color: #969696;
+}
+
+.green {
+  color: #74c476;
+}
+
+.orange {
+  color: #fd8d3c;
+}
+
+.reveal section img{
+  border: 0px;
+  box-shadow:none;
+  
+}
+
+.leaflet-popup-content{
+  font-size:12px;
+}
