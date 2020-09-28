@@ -483,6 +483,10 @@ dflong = dflarge %>%
 dflong
 ```
 
+## More 
+
+https://r4ds.had.co.nz/
+
 ## <span class="green">dplyr,tidyr, exercices</span>
 <h2> Exercice 1, 2 et 3 du TP GoT</h2>
 <a href="https://comeetie.github.io/got/got_tp.html">https://comeetie.github.io/got/got_tp.html</a>
