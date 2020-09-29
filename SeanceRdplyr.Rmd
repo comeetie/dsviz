@@ -328,7 +328,6 @@ a = 10:100
 b = 50:110
 setdiff(a,b)
 intersect(a,b)
-a %in% b
 ```
 
 ## Match, %in%, setdiff, intersect

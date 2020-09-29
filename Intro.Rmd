@@ -56,11 +56,11 @@ appreciate data itself as a first-class product.*
 **-- Hilary Mason, chief scientist at bit.ly**
 
 ## Data Science ?
-*Parler de la donnée, c'est aussi évoquer le datascientist, ce mouton à 5 pattes de la data disposant de compétences statistiques, informatiques, comprenant parfaitement les enjeux métier de l'entreprise... Est-il aussi un fantasme du discours ambiant sur le big data ?*
+*Parler de la donnée, c'est aussi évoquer le __datascientist__, ce mouton à 5 pattes de la data disposant de compétences __statistiques, informatiques__, comprenant parfaitement __les enjeux métier__ de l'entreprise... Est-il aussi un fantasme du discours ambiant sur le big data ?*
 
-*S'il peut exister des profils qui s'approchent de cette description, la réalité démontre le plus souvent que la datascience, comme la science en générale, ne se produit pas seule mais en groupe. La bonne question à se poser est donc plutôt celle de la synchronisation des différentes compétences au sein de l'organisation. Nous plaidons davantage pour un datascientism que pour des datascientists.*
-
-*Une autre réalité méconnue sur le datascientist est qu'il s'agit avant tout d'un métier d'artisan. Chaque problème et chaque jeu de données demande toujours une démarche spécifique qui n'est pas industrialisable, ce que beaucoup de gens ne comprennent pas encore.*
+## Data Science ?
+*S'il peut exister des profils qui s'approchent de cette description, la réalité démontre le plus souvent que la datascience, comme la science en générale, ne se produit pas seule mais __en groupe__.(...) *
+*Une autre réalité méconnue sur le datascientist est qu'il s'agit avant tout d'un __métier d'artisan__. Chaque problème et chaque jeu de données demande toujours une démarche spécifique qui n'est pas industrialisable, ce que beaucoup de gens ne comprennent pas encore.*
 
 
 
