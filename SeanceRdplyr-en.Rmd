@@ -417,6 +417,10 @@ data %>% pull(v3)
 <pre><code class="r"> data %&gt;% rename(v4=v1)
 </pre></code>
 
+<pre><code class="r"> data %&gt;% arrange(v4)
+data %&gt;% arrange(desc(v4))
+</pre></code>
+
 
 ## <span class="green">dplyr,tidyr</span>
 <h2> "summarizes"</h2>
