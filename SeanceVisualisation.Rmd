@@ -216,7 +216,7 @@ library(dplyr)
 </ul>
 
 ## <span class="green"> le bar chart</span>
-```{r, echo=TRUE, message=FALSE,fig.height=5}
+```{r, echo=TRUE, message=FALSE,fig.height=4}
 m_cty = mpg %>% group_by(manufacturer) %>% summarize(mcty=mean(cty))
 ggplot(data=m_cty)+
   geom_bar(aes(x=manufacturer,y=mcty),stat = 'identity')+
@@ -226,7 +226,7 @@ ggplot(data=m_cty)+
 
 
 ## <span class="green"> Ordre ?</span>
-```{r, echo=TRUE, message=FALSE,fig.height=5}
+```{r, echo=TRUE, message=FALSE,fig.height=4}
 m_cty_ordered = m_cty %>% arrange(desc(mcty)) %>% 
   mutate(manufacturer=factor(manufacturer,levels=manufacturer))
 ggplot(data=m_cty_ordered)+
@@ -236,7 +236,7 @@ ggplot(data=m_cty_ordered)+
 ```
 
 ## <span class="green"> Horizontal ?</span>
-```{r, echo=TRUE, message=FALSE,fig.height=5}
+```{r, echo=TRUE, message=FALSE,fig.height=4}
 ggplot(data=m_cty_ordered)+
   geom_bar(aes(x=manufacturer,y=mcty),stat = 'identity')+
   scale_x_discrete("Manufacturer")+
