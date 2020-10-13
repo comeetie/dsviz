@@ -30,7 +30,6 @@ knitr::opts_chunk$set(echo = FALSE)
 
 * `rgeos`: interface entre R et [GEOS](http://trac.osgeo.org/geos/) (Geometry Engine - Open Source) library: area, perimeter, distances, dissolve, buffer, overlap, union, contains... 
 
-
 Toujours utilisé
 
 ## Simple Features for R
@@ -41,7 +40,7 @@ Toujours utilisé
 
 * Plus simple
 
-* [Tidy data](http://vita.had.co.nz/papers/tidy-data.html): compatible `dplyr` et autre `tidyverse` 
+* [Tidy data](http://vita.had.co.nz/papers/tidy-data.html): compatible `dplyr`.
 
 
 
@@ -53,6 +52,7 @@ Toujours utilisé
 
 
 ## Lire des données
+Capable de lire n'importe quel format de données spatiale : shp, geojson, kml
 ```{r,echo=TRUE,warning=FALSE,message=FALSE,results='hide'}
 library(sf)
 mtq <- st_read("data/mtq/martinique.shp")
@@ -61,6 +61,10 @@ mtq <- st_read("data/mtq/martinique.shp")
 class(mtq)
 str(mtq)
 ```
+
+
+
+
 
 ## Changer la projection ou passer en lat/long
 ```{r,echo=TRUE,warning=FALSE,fig.height=4.5}
@@ -76,7 +80,7 @@ Les projections/système de coordonées sont répertoriées grâce à un code le
 - Pseudo-Mercator : 3857 https://epsg.io/3857
 - Lambert azimuthal equal area : 3035 https://epsg.io/3035
 
-Préservations ? angles, aires, disstance locales, ...
+Préservations ? angles, aires, distance locales, ...
  
 
 ## Affichage
@@ -89,6 +93,13 @@ plot(mtq)
 ```{r, echo=TRUE,warning=FALSE,fig.height=4.5}
 plot(st_geometry(mtq))
 ```
+
+## Suppression de la géométrie
+```{r, echo=TRUE,warning=FALSE,fig.height=4.5}
+mtq %>% st_drop_geometry()
+mtq
+```
+
 
 
 ## Centroids 
@@ -175,8 +186,6 @@ write_sf(mtq_v,"./data/voronoi.geojson",driver="GeoJSON")
 
 ## Autre traitements
 
-- st_area(x)
-- st_length(x)
 - st_disjoint(x, y, sparse = FALSE)
 - st_touches(x, y, sparse = FALSE)
 - st_crosses(s, s, sparse = FALSE)
@@ -194,7 +203,90 @@ write_sf(mtq_v,"./data/voronoi.geojson",driver="GeoJSON")
 ## Cartographie
 <img src="./images/semio.jpg" height="700px">
 
+## Cartgographie avec ggplot
+```{r, echo=TRUE,warning=FALSE,message=FALSE,fig.show='last',fig.height=4.5}
+library(sf)
+# Import geo layers
+# Communes of Seine Maritime
+sm <- st_read(dsn = "data/seine_maritime.geojson", 
+              stringsAsFactors = F, quiet=TRUE)
+# French departements
+dep <- st_read(dsn = "data/dep.geojson", 
+               stringsAsFactors = F, quiet=TRUE)
+# change projection (lambert93)
+sm <- st_transform(sm, 2154)
+dep <- st_transform(dep, 2154)
+# Import dataset  
+csp <- read.csv("data/data_seine_maritime.csv")
+# merge geolayer and dataset
+sm <- merge(sm, csp, by="INSEE_COM", all.x=TRUE)
+```
 
+
+## Cartgographie avec ggplot
+
+- ?geom_sf
+- ?geom_sf_label
+- ?geom_sf_text
+- ?coord_sf
+
+
+## Cartgographie avec ggplot
+```{r, echo=TRUE,warning=FALSE,message=FALSE,fig.show='last',fig.height=4.5}
+library(ggplot2)
+ggplot()+geom_sf(data=dep,fill="ivory",color="ivory3")+
+  geom_sf_text(data=dep %>% filter(CODE_REG!=11),aes(label=CODE_DEPT),size=3,family="Palatino", fontface="bold")
+```
+
+## Cartgographie avec ggplot
+```{r, echo=TRUE,warning=FALSE,message=FALSE,fig.show='last',fig.height=4.5}
+library(ggplot2)
+bb = st_bbox(sm)
+ggplot()+geom_sf(data=dep,fill="ivory",color="ivory3")+
+  geom_sf(data = sm %>% st_centroid,aes(size=act))+
+  coord_sf(xlim=bb[c(1,3)],ylim=bb[c(2,4)],ndiscr = 0)
+```
+
+## Cartgographie avec ggplot
+```{r, echo=TRUE,warning=FALSE,message=FALSE,fig.show='last',fig.height=4.5}
+library(ggplot2)
+bb = st_bbox(sm)
+cols <- c("#e3b4a2", "#a2d5d6", "#debbd4", 
+           "#afc2e3", "#b5dab6","#e9e2c1")
+modlab <- c("Agriculteurs", "Artisans","Cadres", 
+             "Employés","Prof. Inter.", "Ouvriers")
+names(cols)=modlab
+
+levels(sm$cat)=modlab
+ggplot()+geom_sf(data=dep,fill="ivory",color="ivory3")+
+  geom_sf(data = sm,aes(fill=cat),size=0.1)+
+  scale_fill_manual("Dominant Socio-Professional\nCategory",values=cols)+
+  theme_minimal()+
+  coord_sf(xlim=bb[c(1,3)],ylim=bb[c(2,4)],ndiscr = 0)
+
+```
+  
+## Choroplethe et discretisation
+<img src="./images/choro.jpeg" height=500>
+  
+  
+## Cartgographie avec ggplot
+```{r, echo=TRUE,warning=FALSE,message=FALSE,fig.height=4.5}
+hist(sm$cad/sm$act,25)
+```
+
+## Cartgographie avec ggplot
+```{r, echo=FALSE,warning=FALSE,message=FALSE,fig.show='last',fig.height=4.5}
+
+sm = sm %>% mutate(manshare = cad/act*100, mansharecat = cut(manshare,quantile(manshare,seq(0,1,length.out = 7)),include.lowest=TRUE))
+
+ggplot()+geom_sf(data=dep,fill="ivory",color="ivory3")+
+  geom_sf(data = sm,aes(fill=mansharecat),size=0.1)+
+  scale_fill_brewer("Share of Manager (%)",palette="RdYlGn",direction = -1)+
+  theme_minimal()+
+  coord_sf(xlim=bb[c(1,3)],ylim=bb[c(2,4)],ndiscr = 0)
+
+```
 
 ## Carte plus complexes
 ```{r, echo=TRUE,warning=FALSE,message=FALSE,fig.show='last',fig.height=4.5}
