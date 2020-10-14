@@ -1,7 +1,7 @@
 ---
 title: "Données spatiales"
 author: "Etienne Côme"
-date: "22 Janvier 2019"
+date: "14 Octobre 2020"
 output:
   revealjs::revealjs_presentation:
     theme: white
@@ -49,7 +49,8 @@ Toujours utilisé
 
 <img src="images/sf.png" alt="format sf" width="800">
 
-
+- metadata 
+- geom column avec des géomtrie stockées au format Well-known_text (wkt) 
 
 ## Lire des données
 Capable de lire n'importe quel format de données spatiale : shp, geojson, kml
@@ -159,25 +160,6 @@ plot(st_geometry(mtq))
 plot(st_geometry(mtq_z), col="red", border="green", add=T)
 ```
 
-
-## Voronoi Polygons  
-<small>google: "st_voronoi R sf" (https://github.com/r-spatial/sf/issues/474 & https://stackoverflow.com/questions/45719790/create-voronoi-polygon-with-simple-feature-in-r)
-</small>
-```{r, echo=TRUE,warning=FALSE,message=FALSE,fig.show='last',fig.height=4.5}
-mtq_v <- st_voronoi(x = st_union(mtq_c))
-mtq_v <- st_intersection(st_cast(mtq_v), st_union(mtq))
-mtq_v <- st_join(x = st_sf(mtq_v), y = mtq_c, join=st_intersects)
-mtq_v <- st_cast(mtq_v, "MULTIPOLYGON")
-plot(st_geometry(mtq_v), col='lightblue')
-```
-
-## Ecrire des données
-
-```{r, echo=TRUE,warning=FALSE,message=FALSE,fig.show='last',fig.height=4.5}
-system("rm data/voronoi.geojson")
-write_sf(mtq_v,"./data/voronoi.geojson",driver="GeoJSON")
-```
-
 ## Autre traitements
 
 - st_area(x)
@@ -198,6 +180,32 @@ write_sf(mtq_v,"./data/voronoi.geojson",driver="GeoJSON")
 - st_covered_by(y, y, sparse = FALSE)
 - st_equals_exact(x, y,0.001, sparse = FALSE)
 - ...
+
+
+
+## Jointure spatiale
+
+- st_join
+
+
+
+## Voronoi Polygons  
+<small>google: "st_voronoi R sf" (https://github.com/r-spatial/sf/issues/474 & https://stackoverflow.com/questions/45719790/create-voronoi-polygon-with-simple-feature-in-r)
+</small>
+```{r, echo=TRUE,warning=FALSE,message=FALSE,fig.show='last',fig.height=4.5}
+mtq_v <- st_voronoi(x = st_union(mtq_c))
+mtq_v <- st_intersection(st_cast(mtq_v), st_union(mtq))
+mtq_v <- st_join(x = st_sf(mtq_v), y = mtq_c, join=st_intersects)
+mtq_v <- st_cast(mtq_v, "MULTIPOLYGON")
+plot(st_geometry(mtq_v), col='lightblue')
+```
+
+## Ecrire des données
+
+```{r, echo=TRUE,warning=FALSE,message=FALSE,fig.show='last',fig.height=4.5}
+system("rm data/voronoi.geojson")
+write_sf(mtq_v,"./data/voronoi.geojson",driver="GeoJSON")
+```
 
 
 ## Cartographie
@@ -231,14 +239,14 @@ sm <- merge(sm, csp, by="INSEE_COM", all.x=TRUE)
 - ?coord_sf
 
 
-## Cartgographie avec ggplot
+## Cartographie avec ggplot
 ```{r, echo=TRUE,warning=FALSE,message=FALSE,fig.show='last',fig.height=4.5}
 library(ggplot2)
 ggplot()+geom_sf(data=dep,fill="ivory",color="ivory3")+
   geom_sf_text(data=dep %>% filter(CODE_REG!=11),aes(label=CODE_DEPT),size=3,family="Palatino", fontface="bold")
 ```
 
-## Cartgographie avec ggplot
+## Cartographie avec ggplot
 ```{r, echo=TRUE,warning=FALSE,message=FALSE,fig.show='last',fig.height=4.5}
 library(ggplot2)
 bb = st_bbox(sm)
@@ -247,8 +255,8 @@ ggplot()+geom_sf(data=dep,fill="ivory",color="ivory3")+
   coord_sf(xlim=bb[c(1,3)],ylim=bb[c(2,4)],ndiscr = 0)
 ```
 
-## Cartgographie avec ggplot
-```{r, echo=TRUE,warning=FALSE,message=FALSE,fig.show='last',fig.height=4.5}
+## Cartographie avec ggplot
+```{r, echo=TRUE,warning=FALSE,message=FALSE,fig.show='hide',fig.height=4.5}
 library(ggplot2)
 bb = st_bbox(sm)
 cols <- c("#e3b4a2", "#a2d5d6", "#debbd4", 
@@ -265,17 +273,38 @@ ggplot()+geom_sf(data=dep,fill="ivory",color="ivory3")+
   coord_sf(xlim=bb[c(1,3)],ylim=bb[c(2,4)],ndiscr = 0)
 
 ```
-  
+
+
+
+## Cartographie avec ggplot
+```{r, echo=FALSE,warning=FALSE,message=FALSE,fig.show='last',fig.height=4.5}
+library(ggplot2)
+bb = st_bbox(sm)
+cols <- c("#e3b4a2", "#a2d5d6", "#debbd4", 
+           "#afc2e3", "#b5dab6","#e9e2c1")
+modlab <- c("Agriculteurs", "Artisans","Cadres", 
+             "Employés","Prof. Inter.", "Ouvriers")
+names(cols)=modlab
+
+levels(sm$cat)=modlab
+ggplot()+geom_sf(data=dep,fill="ivory",color="ivory3")+
+  geom_sf(data = sm,aes(fill=cat),size=0.1)+
+  scale_fill_manual("Dominant Socio-Professional\nCategory",values=cols)+
+  theme_minimal()+
+  coord_sf(xlim=bb[c(1,3)],ylim=bb[c(2,4)],ndiscr = 0)
+
+```
+
 ## Choroplethe et discretisation
 <img src="./images/choro.jpeg" height=500>
   
   
-## Cartgographie avec ggplot
+## Cartographie avec ggplot
 ```{r, echo=TRUE,warning=FALSE,message=FALSE,fig.height=4.5}
 hist(sm$cad/sm$act,25)
 ```
 
-## Cartgographie avec ggplot
+## Cartographie avec ggplot
 ```{r, echo=FALSE,warning=FALSE,message=FALSE,fig.show='last',fig.height=4.5}
 
 sm = sm %>% mutate(manshare = cad/act*100, mansharecat = cut(manshare,quantile(manshare,seq(0,1,length.out = 7)),include.lowest=TRUE))

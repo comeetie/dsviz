@@ -1882,7 +1882,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section>
     <h1 class="title">Visualisation, </br>Shiny</h1>
     <h2 class="author">Etienne Côme</h2>
-    <h3 class="date">17 Janvier 2020</h3>
+    <h3 class="date">14 Octobre 2020</h3>
 </section>
 
 <section id="shiny" class="slide level2">
@@ -1938,7 +1938,7 @@ src: local('Armata Regular'), local('Armata-Regular'), url(data:font/ttf;base64,
 </section>
 <section id="ui-1" class="slide level2">
 <h2><span class="green">UI</span></h2>
-<h3 id="differents-composants">Différents composants :</h3>
+<h3 id="différents-composants">Différents composants :</h3>
 <ul>
 <li>mise en page : page, layout, panel</li>
 <li>inputs : actionButton, dateInput, actionLink, sliderInput, radioButtons,…</li>
@@ -1968,7 +1968,7 @@ src: local('Armata Regular'), local('Armata-Regular'), url(data:font/ttf;base64,
 </section>
 <section id="server-1" class="slide level2">
 <h2><span class="red">Server</span></h2>
-<h3 id="partie-reactives">Partie réactives :</h3>
+<h3 id="partie-réactives">Partie réactives :</h3>
 <ul>
 <li>renderPlot, renderImage,renderTable, …</li>
 </ul>
@@ -1977,13 +1977,13 @@ src: local('Armata Regular'), local('Armata-Regular'), url(data:font/ttf;base64,
 <li>voir la cheat sheet pour plus de détails</li>
 </ul>
 </section>
-<section id="server-reactivite-avancee" class="slide level2">
+<section id="server-réactivité-avancée" class="slide level2">
 <h2><span class="red">Server, réactivité avancée</span></h2>
 <p>structurer l’execution réactive pour éviter de dupliquer des traitements :</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">data =<span class="st"> </span><span class="kw">reactive</span>({})</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">data</span>()</a></code></pre></div>
 </section>
-<section id="server-reactivite-avancee-1" class="slide level2">
+<section id="server-réactivité-avancée-1" class="slide level2">
 <h2><span class="red">Server, réactivité avancée</span></h2>
 <p>Structurer l’execution réactive pour éviter de dupliquer des traitements :</p>
 <ul>
@@ -1998,7 +1998,7 @@ src: local('Armata Regular'), local('Armata-Regular'), url(data:font/ttf;base64,
 <a class="sourceLine" id="cb4-6" data-line-number="6">  <span class="kw">write.csv</span>(<span class="kw">data</span>())  </a>
 <a class="sourceLine" id="cb4-7" data-line-number="7">})</a></code></pre></div>
 </section>
-<section id="server-reactivite-avancee-2" class="slide level2">
+<section id="server-réactivité-avancée-2" class="slide level2">
 <h2><span class="red">Server, réactivité avancée</span></h2>
 <p>Isoler une partie du code :</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">observe</span>({</a>
@@ -2013,12 +2013,32 @@ src: local('Armata Regular'), local('Armata-Regular'), url(data:font/ttf;base64,
 <a class="sourceLine" id="cb5-10" data-line-number="10">  <span class="kw">writeToDatabase</span>(data)</a>
 <a class="sourceLine" id="cb5-11" data-line-number="11">})</a></code></pre></div>
 </section>
-<section id="server-reactivite-avancee-3" class="slide level2">
+<section id="server-réactivité-avancée-3" class="slide level2">
 <h2><span class="red">Server, réactivité avancée</span></h2>
 <p>Executer un bloc de manière conditionel au changement d’un ou de plusieur inputs</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">data =<span class="st"> </span><span class="kw">eventReactive</span>(input,{})</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">data</span>()</a>
 <a class="sourceLine" id="cb6-3" data-line-number="3"><span class="kw">observeEvent</span>(input,{}<span class="er">}</span>)</a></code></pre></div>
+</section>
+<section id="server-réactivité-avancée-4" class="slide level2">
+<h2><span class="red">Server, réactivité avancée</span></h2>
+<p>Déploiement :</p>
+<ul>
+<li>shinyapp.io -&gt; création d’un compte</li>
+<li>boutton publish document</li>
+<li>récupération de la clé et du secret</li>
+<li>penser à regrouper l’ensemble des données utiles dans un fichier Rdata dans le répertoire de l’application</li>
+<li>chargé avec la fonction load</li>
+</ul>
+</section>
+<section id="projets" class="slide level2">
+<h2><span class="red">Projets</span></h2>
+<p>Réaliser une interface shiny permettant d’explorer au choix :</p>
+<ul>
+<li>les données Game Of Throne du TP (got/data/<em>.csv, </em>.geojson)</li>
+<li>les données du service dans ma rue de la Mairie de Paris (dsviz/data/dansmarue.RData)</li>
+</ul>
+<p>Consignes : - Groupe de 4 - Envoyer un mail par groupe avec les membres du groupe et la liste des emails avant le 21 - Enoyer un fichier zip permettant de faire tourner en local ou un lien vers la version hébergé sur shinyapps.io - Rédiger une note de 2 pages décrivant vos choix - Soigner les figures et l’interface - Date limite 16 Novembre 2020</p>
 </section>
     </div>
   </div>

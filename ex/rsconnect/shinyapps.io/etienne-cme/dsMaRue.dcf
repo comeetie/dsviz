@@ -1,0 +1,12 @@
+name: dsMaRue
+title: dsMaRue
+username:
+account: etienne-cme
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3012797
+bundleId: 3739468
+url: https://etienne-cme.shinyapps.io/dsMaRue/
+when: 1602679015.07676
+asMultiple: FALSE
+asStatic: FALSE

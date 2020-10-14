@@ -50,7 +50,7 @@ library(cartography)
 # rm(list=c("q","qr","bb","river"))
 
 
-load("../data/dansmarue.RData")
+load("./dansmarue.RData")
 
 
 # Define UI for application that draws a histogram
@@ -86,7 +86,7 @@ server <- function(input, output) {
         #choroLayer(x = data.sf %>% filter(n>0), var = "n",
                  #  method = "quantile", nclass = input$nbcol,col = carto.pal(pal1="red.pal",n1=input$nbcol))
         data.sf = gr_p %>% left_join(data() %>% st_drop_geometry()%>% group_by(id_car) %>% count()) %>% filter(!is.na(n))
-        plot(st_geometry(roads.geom),col="#666666",lwd = 0.8,bg="#f4eed7")
+        plot(st_geometry(roads.geom),col="#666666",lwd = 0.8,bg="#ffffff")
         plot(st_geometry(river.geom),col="#aaccff",lwd = 3,add=TRUE)
         propSymbolsLayer(x = data.sf, var = "n",
                          legend.title.txt = "Nombre de signalements",

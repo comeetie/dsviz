@@ -1,7 +1,7 @@
 ---
 title: "Visualisation, </br>Shiny"
 author: "Etienne Côme"
-date: "17 Janvier 2020"
+date: "14 Octobre 2020"
 output:
   revealjs::revealjs_presentation:
     theme: white
@@ -145,3 +145,29 @@ data = eventReactive(input,{})
 data()
 observeEvent(input,{}})
 ```
+
+
+## <span class="red">Server, réactivité avancée</span>
+Déploiement :
+
+- shinyapp.io -> création d'un compte
+- boutton publish document
+- récupération de la clé et du secret
+- penser à regrouper l'ensemble des données utiles dans un fichier Rdata dans le répertoire de l'application
+- chargé avec la fonction load
+
+## <span class="red">Projets</span>
+
+
+Réaliser une interface shiny permettant d'explorer au choix :
+
+- les données Game Of Throne du TP (got/data/*.csv, *.geojson)
+- les données du service dans ma rue de la Mairie de Paris (dsviz/data/dansmarue.RData)
+
+Consignes :
+- Groupe de 4
+- Envoyer un mail par groupe avec les membres du groupe et la liste des emails avant le 21
+- Enoyer un fichier zip permettant de faire tourner en local ou un lien vers la version hébergé sur shinyapps.io
+- Rédiger une note de 2 pages décrivant vos choix
+- Soigner les figures et l'interface
+- Date limite 16 Novembre 2020
