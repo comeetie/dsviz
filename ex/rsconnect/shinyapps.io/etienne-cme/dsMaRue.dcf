@@ -5,8 +5,8 @@ account: etienne-cme
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 3012797
-bundleId: 3739468
+bundleId: 3740134
 url: https://etienne-cme.shinyapps.io/dsMaRue/
-when: 1602679015.07676
+when: 1602687920.89379
 asMultiple: FALSE
 asStatic: FALSE
