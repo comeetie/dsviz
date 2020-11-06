@@ -170,4 +170,4 @@ Consignes :
 - Enoyer un fichier zip permettant de faire tourner en local ou un lien vers la version hébergé sur shinyapps.io
 - Rédiger une note de 2 pages décrivant vos choix
 - Soigner les figures et l'interface
-- Date limite 16 Novembre 2020
+- Date limite 7 Décembre 2020

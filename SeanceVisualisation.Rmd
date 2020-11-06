@@ -262,12 +262,12 @@ tempstats.df=do.call(rbind,tempstats.list)
 ```
 
 ## Ordre naturel imposé par le temps
-```{r, echo=TRUE, message=FALSE,fig.height=5}
+```{r, echo=TRUE, message=FALSE,fig.height=4}
 ggplot(data=tempstats.df,aes(x=time,y=nbbikes))+geom_point()
 ```
 
 ## Ordre naturel imposé par le temps
-```{r, echo=TRUE, message=FALSE,fig.height=5}
+```{r, echo=TRUE, message=FALSE,fig.height=4}
 ggplot(data=tempstats.df,aes(x=time,y=nbbikes))+geom_line()
 ```
 
@@ -626,13 +626,13 @@ scale_x_continuous(limits=c(0,45),breaks=seq(0,45,2))</pre></code>
 
 
 ## ggplot
-```{r, echo=TRUE, message=FALSE}
+```{r, echo=TRUE, message=FALSE,fig.height=4}
 ggplot(mpg,aes(y=cty,x=hwy))+
   geom_point(color="blue")+stat_density2d()
 ```
 
 ## ggplot
-```{r, echo=TRUE, message=FALSE}
+```{r, echo=TRUE, message=FALSE,fig.height=4}
 ggplot(mpg,aes(y=cty,x=hwy))+
   geom_point(color="blue")+stat_smooth()
 ```
@@ -667,7 +667,7 @@ ggplot(data=st_tempstats_sub.df)+
 
 ## Exercices
 Reprendre les échelles, légendes de cette figures
-```{r, echo=FALSE, message=FALSE}
+```{r, echo=FALSE, message=FALSE,fig.height=4}
 ggplot(data=st_tempstats_sub.df)+
   geom_line(aes(x=time,y=nbbikes,group=id,color=factor(id)),size=2)+
   facet_grid(id ~ .)
@@ -683,14 +683,14 @@ ggplot(data=iris,aes(x=Petal.Length,y=Petal.Width,color=Species,shape=Species))+
 ## Exercices
 Reproduire ce graphique (Les données mtcars sont déjà chargées)
 ! modifier le theme du graphique ?theme
-```{r, echo=FALSE, message=FALSE}
+```{r, echo=FALSE, message=FALSE,fig.height=4}
 mto = mtcars %>% mutate(label = rownames(mtcars)) %>% arrange(mpg)  %>% mutate(label=factor(label,levels=label))
 ggplot(data=mto,aes(y=label,x=mpg))+geom_point()+geom_text(aes(y=label,x=mpg+1,label=label),hjust= "left")+theme_bw()+scale_x_continuous(limits=c(10,50),"Miles / Gallon")+scale_y_discrete("")+theme(axis.title.y = element_blank(), axis.text.y = element_blank(),line = element_blank(),rect=element_blank(),axis.line.x = element_line(),axis.ticks.x.bottom = element_line())
 ```
 
 ## Exercices
 Reproduire ce graphique
-```{r, echo=FALSE, message=FALSE}
+```{r, echo=FALSE, message=FALSE,fig.height=4}
 library(tidyr)
 # téléchargement et remise en forme des données
 url = "./data/sp_Lyon.json"

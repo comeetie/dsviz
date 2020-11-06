@@ -1,0 +1,172 @@
+---
+title: "Visualisation, </br>Shiny"
+author: "Etienne Côme"
+date: "14 Octobre 2020"
+output:
+  revealjs::revealjs_presentation:
+    theme: white
+    transition: none
+    self_contained: true
+    css: slides.css
+  beamer_presentation:
+    toc: false
+    incremental: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+## Shiny
+<link href="https://fonts.googleapis.com/css?family=Armata&display=swap" rel="stylesheet">
+
+- Interactive interface / dashboard 
+- Quite easy to implement
+- All in R
+- Debugging sometimes delicate because // javascript-html
+- Requires a shiny server to be deployed 
+
+
+## Shiny
+### 2 components
+
+- <span class="green">UI: describes the interface</span>
+  - creation of the layout
+  - buttons, sliders, plots, ... 
+- <span class="red">Server: describes the application logic </span>
+  - carries out the treatments 
+  - defines how the interface updates when inputs change
+  - makes the link between the inputs and the outputs
+
+## <span class="green">UI</span>
+
+```{r, eval=FALSE,echo=TRUE}
+ui <- fluidPage(
+    # Application title
+    titlePanel("Old Faithful Geyser Data"),
+    # Sidebar with a slider input for number of bins 
+    sidebarLayout(
+        sidebarPanel(
+            sliderInput(inputId = "bins", label = "Number of bins:", 
+                        min = 1, max = 50, value = 30)
+        ),
+        # Show a plot of the generated distribution
+        mainPanel(plotOutput(outputId = "distPlot"))
+    )
+)
+```
+
+## <span class="green">UI</span>
+
+
+### Different components :
+
+- layout : page, layout, panel
+- inputs : actionButton, dateInput, actionLink, sliderInput, radioButtons,...
+- outputs : plotOutput, dataTableOutput, ... + leaflet
+
+see la cheat sheet for details
+
+### ! inputId, outputId
+- id to reference input and output (defined in the ui)
+- allow the server to access them
+
+## <span class="red">Server</span>
+```{r, eval=FALSE,echo=TRUE}
+# fait le liens entre input et output
+server <- function(input, output) {
+
+    output$distPlot <- renderPlot({
+        # generate bins based on input$bins from ui.R
+        x    <- faithful[, 2]
+        bins <- seq(min(x), max(x), length.out = input$bins + 1)
+
+        # draw the histogram with the specified number of bins
+        hist(x, breaks = bins, col = 'darkgray', border = 'white')
+    })
+}
+```
+
+## <span class="red">Server</span>
+
+### Reactive part :
+- renderPlot, renderImage,renderTable, ...
+
+Th block will be re run each time one of the input it use change.
+
+see cheat-sheet for details
+
+
+## <span class="red">Server, advanced reactivity</span>
+Structure the code to avoid duplicated treatments :
+```{r, eval=FALSE,echo=TRUE}
+data = reactive({})
+data()
+```
+
+## <span class="red">Server, réactivité avancée</span>
+Structure the code to avoid duplicated treatments :
+
+- reactive : reactive block that return a reactive expression
+- observe : reactive block without any output (side effect i/o)
+
+```{r, eval=FALSE,echo=TRUE}
+data = reactive({})
+data()
+renderPlot(data())
+observe({
+  input$saveButton 
+  write.csv(data())  
+})
+```
+
+## <span class="red">Server, advanced reactivity</span>
+Isolate a code block :
+```{r, eval=FALSE,echo=TRUE}
+observe({
+  input$saveButton  # Do take a dependency on input$saveButton
+
+  # isolate a whole block
+  data <- isolate({
+    a <- input$valueA   # No dependency on input$valueA or input$valueB
+    b <- input$valueB
+    c(a=a, b=b)
+  })
+  writeToDatabase(data)
+})
+```
+
+
+## <span class="red">Server, advanced reactivity</span>
+Execute a block conditional to a specified list of inputs change
+```{r, eval=FALSE,echo=TRUE}
+data = eventReactive(input,{})
+data()
+observeEvent(input,{}})
+```
+
+
+## <span class="red">Server, advanced reactivity</span>
+Deploy :
+
+- shinyapp.io -> account creation
+- button publish document
+- get key and secret
+- package the data needed by the app in an Rdata file in the app folder 
+- use the load functio to load Rdata files
+
+## <span class="red">Projets</span>
+
+
+Build a shiny interface to explore one of the following dataset :
+
+- Game Of Throne data from the TP (got/data/*.csv, *.geojson)
+- the "dans ma rue" service data (dsviz/data/dansmarue.RData)
+
+Instructions :
+- Groupe of 4
+- Send an e-mail to specify the groups
+- Send a zip files of the app folder or better a link to a hosted version on shinyapps.io
+- Write a short note (around 2 pages) that describes your choices
+- dead line 7 Décembre 2020
