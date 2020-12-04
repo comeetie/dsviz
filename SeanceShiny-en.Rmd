@@ -165,8 +165,8 @@ Build a shiny interface to explore one of the following dataset :
 - the "dans ma rue" service data (dsviz/data/dansmarue.RData)
 
 Instructions :
-- Groupe of 4
+
 - Send an e-mail to specify the groups
 - Send a zip files of the app folder or better a link to a hosted version on shinyapps.io
-- Write a short note (around 2 pages) that describes your choices
-- dead line 7 Décembre 2020
+- Write a short note about your work (around 2 pages)
+- dead line 14 Décembre 2020
