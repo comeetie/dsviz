@@ -1,7 +1,7 @@
 ---
 title: "Data Science and visualization</br> R and dplyr"
 author: "Etienne Côme"
-date: "23 Septembre 2020"
+date: "September 14, 2021"
 output:
   revealjs::revealjs_presentation:
     theme: white
@@ -236,7 +236,7 @@ data = read_delim("filename")
 for (i in 1:length(a)){}
 while(i > 4){i=i-1}
 ```
-<span class="red">! avoid for loops  (vectorial operations) </span>
+<span class="red">! avoid for loops  (use vectors) </span>
 
 ```{r, echo=TRUE}
 a=runif(100000)
@@ -251,7 +251,7 @@ t1
 for (i in 1:length(a)){}
 while(i > 4){i=i-1}
 ```
-<span class="red">! avoid for loops  (vectorial operations) </span>
+<span class="red">! avoid for loops  (use vectors) </span>
 
 <span class="green">Vectorial version</span>
 ```{r, echo=TRUE}
@@ -317,7 +317,7 @@ r;class(r)
 r=sapply(b,which.max)
 r;class(r)
 ```
-<span class="red">preferable to loops...</span>
+<span class="red">better than loops... </span>
 
 
 
@@ -372,8 +372,9 @@ table(data[,c('v1', 'v2')])
 ## <span class="green">dplyr,tidyr</span>
 2 libraries for easy data manipulation
 (<a href="./data-transformation.pdf">Cheatsheet</a>)</br>
-! Introduction of a new operator !</br>.
-Sequence of operations  : introduction of the pipe operator :
+! Introduction of a new operator !</br>
+
+Sequence of operations, introduction of the pipe operator :
 
 <h1 class="red" style="text-align:center">%&gt;% 
 </h1>
@@ -403,8 +404,7 @@ data %>% slice(20:30)</pre></code>
 <pre><code class="r">data %&gt;% select(v1,v2)
 data %&gt;% select(contains('var'))
 data %&gt;% select(-v3)
-data %>% pull(v3)
-...</pre></code> ...</pre></code> ...</pre></code> ...</pre></code>...
+data %>% pull(v3)</pre></code> 
 
 
 
@@ -414,10 +414,10 @@ data %>% pull(v3)
 <pre><code class="r">data %&gt;% mutate(v3=v1/v2)
 </pre></code>
 
-<pre><code class="r"> data %&gt;% rename(v4=v1)
+<pre><code class="r">data %&gt;% rename(v4=v1)
 </pre></code>
 
-<pre><code class="r"> data %&gt;% arrange(v4)
+<pre><code class="r">data %&gt;% arrange(v4)
 data %&gt;% arrange(desc(v4))
 </pre></code>
 
@@ -454,6 +454,14 @@ data1 %&gt;% mutate(v2=lead(v4))
 
 ! after a group_by to mutate by groups.
 
+```{r, echo=FALSE,message=FALSE,comment=FALSE}
+library(RcppRoll)
+?roll_mean
+?roll_max
+?roll_median
+```
+
+
 ## <span class="green">dplyr,tidyr</span>
 <h2>Join tables : "X_join"</h2>
 <pre><code class="r"> 
@@ -473,19 +481,20 @@ library(tidyr)
 ```{r, echo=TRUE}
 library(dplyr)
 library(tidyr)
-df=expand_grid(year=2015:2020,countries=c("France", "Italy", "Morocco"))
+df=expand_grid(year=2015:2020,
+               countries=c("France", "Italy", "Morocco"))
 df$value=runif(nrow(df))
-df
+df[1:3,]
 ```
 
 
 
-## <span class="green">dplyr,tidyr</span>
-Fitness </h2> Fitness </h2>
+## <span class="green">tidyr</span>
+
 <ul>
 <li>tidyr::pivot_long: wide format -> long format
 <li>tidyr::pivot_wider: long format -> wide format
-<li> tidyr::separate: split of u
+<li>tidyr::separate: split a column
 <li>tidyr::unite: concatenation of columns
 </ul>
 
