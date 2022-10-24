@@ -42,6 +42,7 @@ https://cloud.r-project.org/
 <h4> Download and install Rstudio</h4>
 https://rstudio.com/products/rstudio/download/
 
+<h4> Or use rstudio -cloud : https://rstudio.cloud/ </h4>
 <h4> Install packages</h4>
 <pre><code class="r">install.packages("dplyr")
 install.packages("readr")
@@ -88,7 +89,6 @@ i = rep(c(1,2),each=3);b[i]
 
 
 ## Basic types, factors :
-vectors, basic manipulations:
 ```{r, echo=TRUE}
 b = c("a", "g", "t", "c", "g")
 c = factor(b,levels=c("a", "t", "g", "c"))
