@@ -1,7 +1,7 @@
 ---
 title: "Data Science and visualization</br> R and dplyr"
 author: "Etienne Côme"
-date: "September 14, 2021"
+date: "9 Novembre 2023"
 output:
   revealjs::revealjs_presentation:
     theme: white
@@ -376,7 +376,7 @@ table(data[,c('v1', 'v2')])
 
 Sequence of operations, introduction of the pipe operator :
 
-<h1 class="red" style="text-align:center">%&gt;% 
+<h1 class="red" style="text-align:center">|&gt; or %&gt;%
 </h1>
 <pre><code class="r"> x%&gt;% f(y) =f(x,y) </pre></code>
 <pre><code class="r"> x%&gt;% f(y) %&gt;% g(z) = g(f(x,y),z) </pre></code>
@@ -518,11 +518,39 @@ dflong
 
 https://r4ds.had.co.nz/
 
-## <span class="green">dplyr,tidyr, exercises</span>
-Exercise 1, 2 and 3 of GoT:
-<a href="https://comeetie.github.io/got/got_tp.html">https://comeetie.github.io/got/got_tp.html</a>
 
+## <span class="green">exercises, starwars</span>
 
+- Load the starwars data
+- Number of line / column ?
+- height of the tallest character ?
+- row number and name of the tallest character
+- extract rows 10 to 20
+- sort by homeworld / gender
+- height of the smallest character ?
+- row number and name of the smallest character
+- mean and standard deviation of Droids height?
+- mean and standard deviation of Humans height?
+- levels of sex features ?
+
+## <span class="green">exercises, starwars</span>
+
+- number of character in each level ?
+- contingency table sex/homeworld ?
+- compute bmi (mass/height^2) and find min/max character  ?
+- number of missing value per column ?
+- find the characters that appear in at least 6 films ?
+- scatter plot of height mass ?
+- boxplot of heigt,mass ?
+- histogram of height,mass ?
+- transform the homeworld feature to a factor
+- remove rows with missing values
+
+## <span class="green">exercises, starwars</span>
+with dplyr:
+
+- mean height per species sorted 
+- mean mass of the whole population exlucding the Hutt
 
 ## <span class="green">dplyr,tidyr, extra exercise</span>
 <h2>Baby names</h2>
@@ -534,4 +562,12 @@ The data to be used are available in the data directory:
 
 ## <span class="green">dplyr,tidyr, exercise</span> {data-background=#ffffff}
 <img src='./images/prénomsmap.png' width="1000px">
+
+## <span class="green">dplyr,tidyr, exercises</span>
+Exercise 1, 2 and 3 of GoT:
+<a href="https://comeetie.github.io/got/got_tp.html">https://comeetie.github.io/got/got_tp.html</a>
+
+
+
+
 

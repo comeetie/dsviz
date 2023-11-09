@@ -1,7 +1,7 @@
 ---
 title: "Visualisation, </br>Shiny"
 author: "Etienne Côme"
-date: "14 Octobre 2020"
+date: "9 Novembre 2023"
 output:
   revealjs::revealjs_presentation:
     theme: white
@@ -156,17 +156,3 @@ Deploy :
 - package the data needed by the app in an Rdata file in the app folder 
 - use the load functio to load Rdata files
 
-## <span class="red">Projets</span>
-
-
-Build a shiny interface to explore one of the following dataset :
-
-- Game Of Throne data from the TP (got/data/*.csv, *.geojson)
-- the "dans ma rue" service data (dsviz/data/dansmarue.RData)
-
-Instructions :
-
-- Send an e-mail to specify the groups
-- Send a zip files of the app folder or better a link to a hosted version on shinyapps.io
-- Write a short note about your work (around 2 pages)
-- dead line 14 Décembre 2020
