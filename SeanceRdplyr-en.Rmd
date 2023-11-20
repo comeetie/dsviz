@@ -471,6 +471,15 @@ data1 %&gt;% inner_join(data2)
 data1 %&gt;% full_join(data2)
 </pre></code>
 
+### Rolling join
+
+<pre><code class="r"> 
+# For each `sale_date` within a particular `id`,
+# find only the closest `promo_date` that occurred before that sale
+by <- join_by(id, closest(sale_date >= promo_date))
+left_join(sales, promos, by)
+</pre></code>
+see [join_by](https://dplyr.tidyverse.org/reference/join_by.html).
 
 ## <span class="green">dplyr,tidyr</span>
 <h2>long format </h2>
@@ -550,7 +559,7 @@ https://r4ds.had.co.nz/
 with dplyr:
 
 - mean height per species sorted 
-- mean mass of the whole population exlucding the Hutt
+- mean mass of the whole population excluding the Hutt
 
 ## <span class="green">dplyr,tidyr, extra exercise</span>
 <h2>Baby names</h2>

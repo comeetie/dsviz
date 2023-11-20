@@ -2177,7 +2177,7 @@ data = read_delim(&quot;filename&quot;)
 <span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(a)){a[i]<span class="ot">=</span>a[i]<span class="sc">+</span><span class="dv">5</span>}</span>
 <span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>t1<span class="ot">=</span><span class="fu">Sys.time</span>()<span class="sc">-</span>t</span>
 <span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>t1</span></code></pre></div>
-<pre><code>## Time difference of 0.01047587 secs</code></pre>
+<pre><code>## Time difference of 0.009490013 secs</code></pre>
 </section>
 <section id="loops-and-flow-control-1" class="slide level2">
 <h2>Loops and flow control</h2>
@@ -2189,9 +2189,9 @@ data = read_delim(&quot;filename&quot;)
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>a<span class="ot">=</span>a<span class="sc">+</span><span class="dv">5</span></span>
 <span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>t2<span class="ot">=</span><span class="fu">Sys.time</span>()<span class="sc">-</span>t</span>
 <span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>t2</span></code></pre></div>
-<pre><code>## Time difference of 0.001668453 secs</code></pre>
+<pre><code>## Time difference of 0.001629114 secs</code></pre>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(t1)<span class="sc">/</span><span class="fu">as.numeric</span>(t2)</span></code></pre></div>
-<pre><code>## [1] 6.278794</code></pre>
+<pre><code>## [1] 5.82526</code></pre>
 </section>
 <section id="some-vector-functions" class="slide level2">
 <h2>Some vector functions</h2>
@@ -2252,30 +2252,24 @@ data = read_delim(&quot;filename&quot;)
 <p>Select a part of the data</p>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co">#logical indexing</span></span>
 <span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>a[a<span class="sc">$</span>v1<span class="sc">&gt;</span><span class="fl">0.98</span> <span class="sc">&amp;</span> a<span class="sc">$</span>v3<span class="sc">==</span><span class="dv">3</span>,]</span></code></pre></div>
-<pre><code>##             v1            v2 v3
-## 46   0.9996324  0.5544789557  3
-## 521  0.9901905  0.2951766813  3
-## 553  0.9881484 -1.1831963332  3
-## 1089 0.9855718 -1.2155869652  3
-## 1136 0.9839926 -1.3339972088  3
-## 2038 0.9970237  0.4179429453  3
-## 2313 0.9873765  0.2567880002  3
-## 2521 0.9840950  1.4672442282  3
-## 2860 0.9958212  0.0001826391  3
-## 3240 0.9817509 -0.5649385161  3</code></pre>
+<pre><code>##             v1          v2 v3
+## 340  0.9914351 -1.08201538  3
+## 1034 0.9990323 -0.56599477  3
+## 2133 0.9950517  1.94434274  3
+## 3327 0.9810311 -0.07764944  3
+## 3721 0.9841322 -0.54980544  3
+## 4191 0.9950105  0.32012035  3
+## 4627 0.9881333 -1.32285484  3</code></pre>
 <div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co">#substitute function</span></span>
 <span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(a,v1<span class="sc">&gt;</span><span class="fl">0.98</span> <span class="sc">&amp;</span> v3<span class="sc">==</span><span class="dv">3</span>)</span></code></pre></div>
-<pre><code>##             v1            v2 v3
-## 46   0.9996324  0.5544789557  3
-## 521  0.9901905  0.2951766813  3
-## 553  0.9881484 -1.1831963332  3
-## 1089 0.9855718 -1.2155869652  3
-## 1136 0.9839926 -1.3339972088  3
-## 2038 0.9970237  0.4179429453  3
-## 2313 0.9873765  0.2567880002  3
-## 2521 0.9840950  1.4672442282  3
-## 2860 0.9958212  0.0001826391  3
-## 3240 0.9817509 -0.5649385161  3</code></pre>
+<pre><code>##             v1          v2 v3
+## 340  0.9914351 -1.08201538  3
+## 1034 0.9990323 -0.56599477  3
+## 2133 0.9950517  1.94434274  3
+## 3327 0.9810311 -0.07764944  3
+## 3721 0.9841322 -0.54980544  3
+## 4191 0.9950105  0.32012035  3
+## 4627 0.9881333 -1.32285484  3</code></pre>
 </section>
 <section id="binning-cut" class="slide level2">
 <h2>Binning: cut</h2>
@@ -2283,7 +2277,7 @@ data = read_delim(&quot;filename&quot;)
 <div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>r<span class="ot">=</span><span class="fu">cut</span>(a<span class="sc">$</span>v2,<span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>,<span class="sc">-</span><span class="dv">3</span>,<span class="sc">-</span><span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="cn">Inf</span>))</span>
 <span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(r);<span class="fu">head</span>(r)</span></code></pre></div>
 <pre><code>## [1] &quot;factor&quot;</code></pre>
-<pre><code>## [1] (-2,1] (-2,1] (-2,1] (-2,1] (1,2]  (1,2] 
+<pre><code>## [1] (-2,1] (-2,1] (-2,1] (-2,1] (-2,1] (-2,1]
 ## Levels: (-Inf,-3] (-3,-2] (-2,1] (1,2] (2, Inf]</code></pre>
 </section>
 <section id="match-in-setdiff-intersect" class="slide level2">
@@ -2326,11 +2320,11 @@ data = read_delim(&quot;filename&quot;)
 ## 125 125 125 125</code></pre>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(data[,<span class="fu">c</span>(<span class="st">&#39;v1&#39;</span>, <span class="st">&#39;v2&#39;</span>)])</span></code></pre></div>
 <pre><code>##    v2
-## v1   0  1  2  3  4  5  6  7  8
-##   a  0  8  8 35 37 20  8  6  3
-##   c  0  0 20 39 27 24  9  5  1
-##   g  1  7 13 25 39 22 14  2  2
-##   t  2  6 12 27 32 26 12  7  1</code></pre>
+## v1   0  1  2  3  4  5  6  7  8  9
+##   a  0  6 17 24 30 27 16  5  0  0
+##   c  2 10 13 18 34 27 18  2  1  0
+##   g  1  2 14 19 30 35 17  5  1  1
+##   t  0  1 13 17 36 34 16  7  1  0</code></pre>
 </section>
 <section id="dplyrtidyr" class="slide level2">
 <h2><span class="green">dplyr,tidyr</span></h2>
@@ -2440,6 +2434,14 @@ data1 %&gt;% inner_join(data2)
 data1 %&gt;% full_join(data2)
 </pre>
 <p></code></p>
+<h3 id="rolling-join">Rolling join</h3>
+<pre><code class="r"> 
+# For each `sale_date` within a particular `id`,
+# find only the closest `promo_date` that occurred before that sale
+by &lt;- join_by(id, closest(sale_date &gt;= promo_date))
+left_join(sales, promos, by)
+</pre>
+<p></code> see <a href="https://dplyr.tidyverse.org/reference/join_by.html">join_by</a>.</p>
 </section>
 <section id="dplyrtidyr-7" class="slide level2">
 <h2><span class="green">dplyr,tidyr</span></h2>
@@ -2455,9 +2457,9 @@ long format
 <pre><code>## # A tibble: 3 × 3
 ##    year countries value
 ##   &lt;int&gt; &lt;chr&gt;     &lt;dbl&gt;
-## 1  2015 France    0.900
-## 2  2015 Italy     0.662
-## 3  2015 Morocco   0.434</code></pre>
+## 1  2015 France    0.462
+## 2  2015 Italy     0.137
+## 3  2015 Morocco   0.526</code></pre>
 </section>
 <section id="tidyr" class="slide level2">
 <h2><span class="green">tidyr</span></h2>
@@ -2482,9 +2484,9 @@ long format -&gt; wide format
 <pre><code>## # A tibble: 3 × 7
 ##   countries `2015` `2016` `2017` `2018` `2019` `2020`
 ##   &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-## 1 France     0.900 0.416   0.944  0.833  0.745  0.921
-## 2 Italy      0.662 0.834   0.733  0.746  0.971  0.694
-## 3 Morocco    0.434 0.0117  0.983  0.518  0.441  0.931</code></pre>
+## 1 France     0.462  0.811  0.167  0.519  0.258  0.372
+## 2 Italy      0.137  0.216  0.370  0.838  0.313  0.903
+## 3 Morocco    0.526  0.809  0.990  0.976  0.219  0.771</code></pre>
 </section>
 <section id="dplyrtidyr-9" class="slide level2">
 <h2><span class="green">dplyr,tidyr</span></h2>
@@ -2494,26 +2496,26 @@ Wide format -&gt; long format
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>dflong <span class="ot">=</span> dflarge <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span><span class="dv">1</span>,<span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>,<span class="at">names_to =</span> <span class="st">&quot;year&quot;</span>)</span>
 <span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>dflong</span></code></pre></div>
 <pre><code>## # A tibble: 18 × 3
-##    countries year   value
-##    &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt;
-##  1 France    2015  0.900 
-##  2 France    2016  0.416 
-##  3 France    2017  0.944 
-##  4 France    2018  0.833 
-##  5 France    2019  0.745 
-##  6 France    2020  0.921 
-##  7 Italy     2015  0.662 
-##  8 Italy     2016  0.834 
-##  9 Italy     2017  0.733 
-## 10 Italy     2018  0.746 
-## 11 Italy     2019  0.971 
-## 12 Italy     2020  0.694 
-## 13 Morocco   2015  0.434 
-## 14 Morocco   2016  0.0117
-## 15 Morocco   2017  0.983 
-## 16 Morocco   2018  0.518 
-## 17 Morocco   2019  0.441 
-## 18 Morocco   2020  0.931</code></pre>
+##    countries year  value
+##    &lt;chr&gt;     &lt;chr&gt; &lt;dbl&gt;
+##  1 France    2015  0.462
+##  2 France    2016  0.811
+##  3 France    2017  0.167
+##  4 France    2018  0.519
+##  5 France    2019  0.258
+##  6 France    2020  0.372
+##  7 Italy     2015  0.137
+##  8 Italy     2016  0.216
+##  9 Italy     2017  0.370
+## 10 Italy     2018  0.838
+## 11 Italy     2019  0.313
+## 12 Italy     2020  0.903
+## 13 Morocco   2015  0.526
+## 14 Morocco   2016  0.809
+## 15 Morocco   2017  0.990
+## 16 Morocco   2018  0.976
+## 17 Morocco   2019  0.219
+## 18 Morocco   2020  0.771</code></pre>
 </section>
 <section id="more" class="slide level2">
 <h2>More</h2>
@@ -2555,7 +2557,7 @@ Wide format -&gt; long format
 <p>with dplyr:</p>
 <ul>
 <li>mean height per species sorted</li>
-<li>mean mass of the whole population exlucding the Hutt</li>
+<li>mean mass of the whole population excluding the Hutt</li>
 </ul>
 </section>
 <section id="dplyrtidyr-extra-exercise" class="slide level2">
