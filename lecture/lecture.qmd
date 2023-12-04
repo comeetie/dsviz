@@ -94,7 +94,7 @@ st_write(mtq,"data/mtq/martinique.gpkg",delete_layer = TRUE)
 The gpkg (geopackage) format is open (not linked to an operating system) and implemented as a SQLite database. Also note the existence of the geo-parquet format, which is extremely efficient for processing large volumes of spatial data.
 
 
-## Coordiantes systems and epsg codes
+## Coordinates systems and epsg codes
 
 Projections/coordinate systems are listed using a code called an epsg code:
 
@@ -114,10 +114,20 @@ Get the projection using 'st_crs()' ([epsg code](https://epsg.io/)) and edit it 
 
 ```{r}
 st_crs(mtq)
-mtq_4326 <- mtq |> st_transform(4326)
 ```
 
 
+## Projection 
+
+Get the projection using 'st_crs()' ([epsg code](https://epsg.io/)) and edit it using 'st_transform()'.
+
+<small>
+'sf' uses the default spherical geometry for data that has not been projected since version 1.0 thanks to the 's2' library. See [https://r-spatial.github.io](https://r-spatial.github.io/sf/articles/sf7.html) for details.
+</small>
+
+```{r}
+mtq_4326 <- mtq |> st_transform(4326)
+```
 
 ## Ploting
 
@@ -134,6 +144,8 @@ Only the geometry:
 ```{r, nm=TRUE}
 plot(st_geometry(mtq))
 ```
+
+# Spatial processing
 
 ## Centroids
 
@@ -152,7 +164,7 @@ mat[1:5, 1:5]
 
 ## Aggregation 
 
-Union simple  : 
+Union : 
 
 ```{r, nm = TRUE}
 mtq_u <- st_union(mtq)
@@ -222,7 +234,7 @@ plot(pts, pch = 20, col = "red", add=TRUE, cex = 1)
 
 ##
 
-'st_join' is used to perform a spatial join an aggregation.
+'st_join' is used to perform a spatial join.
 
 
 <small>
@@ -231,7 +243,7 @@ It is possible to fine-tune the join (points on borders,...) with the 'join' arg
 
 ```{r p0a, nm=TRUE}
 mtq_counts <- mtq |>
-st_join(st_as_sf(pts))
+  st_join(st_as_sf(pts))
 
 head(mtq_counts |> select(INSEE_COM),3)
 ```
@@ -329,7 +341,12 @@ plot(st_geometry(accidents.2019.paris))
 
 ## Webmaps
 
-Several solutions exist to make interactive maps with R. 'mapview', 'leaflet' and 'mapdeck' are the main ones. For simplicity's sake, we're focusing on 'mapview' here. Interactive maps are not necessarily very relevant for representing geostatistical information. On the other hand, they are useful for exploring databases. Let's look at an example with 'mapview' regarding fatal accidents in Paris in 2019.
+Several solutions exist to make interactive maps with R. 'mapview', 'leaflet' and 'mapdeck' are the main ones. 
+
+
+For simplicity's sake, we're focusing on 'mapview' here. Interactive maps are not necessarily very relevant for representing geostatistical information. On the other hand, they are useful for exploring databases. 
+
+Let's look at an example with 'mapview' regarding fatal accidents in Paris in 2019.
 
 ##
 ```{r}
@@ -362,7 +379,7 @@ mapviewOptions(leafletHeight=300)
 
 ```{r, cache=FALSE}
 mapview(individus_tues,
-        map.types = "OpenStreetMap.HOT", legend = TRUE,
+         legend = TRUE,
         cex = 5, col.regions = "#217844", lwd = 0, alpha = 0.9,
         layer.name = 'Individus tués')
 ```
@@ -379,36 +396,36 @@ mapviewOptions(leafletHeight=300)
 
 ```{r, cache=FALSE}
 mapview(individus_tues,
-        map.types = "OpenStreetMap.HOT", legend=TRUE,
+        legend=TRUE,
         layer.name = 'Individus tués',
         cex="age", zcol="sexe", lwd=0, alpha=0.9
        )
 ```
 
-## Cartes statiques avec `ggplot2`
-
-Là encore, différents packages R sont utilisés pour faire des cartes statiques : 
-
-- `ggplot2` est un package très utilisé pour faire tous types de graphiques, et a été adapté spécifiquement aux cartes (`geom_sf`). 
-- Le package `tmap` contient des fonctionnalités avancées basées sur la logique de `ggplot2`
-- `mapsf` (successeur de `cartography`) s'appuie sur un langage dit "base R" et permet de faire des représentations cartographiques, basiques comme avancées.
-
-## 
-
-Par simplicité, nous nous concentrons ici sur `ggplot2`, package très renommé pour tous types de graphiques.
+## Static maps with 'ggplot2' 
 
 
-## Intégrer des données spatiales avec `geom_sf`
+Again, different R packages are used to make static maps: 
 
-Petite introduction / rappel de sémiologie graphique : 
+- 'ggplot2' is a widely used package for all types of charts, and has been adapted specifically for maps ('geom_sf'). 
+- The 'tmap' package contains advanced features based on the logic of 'ggplot2' 
+- 'mapsf' (successor to 'cartography') is based on a so-called "R-based" language and allows you to make cartographic representations, both basic and advanced. 
+
+
+## For simplicity's sake, we focus here on 'ggplot2', a well-known package for all types of charts.
+
+
+##  `geom_sf`
+
+Graphical semiology : 
 
 <img src="img/lightsemio.png" alt="Light Semiology" height="400px">
 
 ## 
 
-On travaille avec la couche cartographique des IRIS[^1].
+We work with the IRIS map layer[^1]. 
 
-[^1]: Les iris sont un zonage statistique de l'Insee dont l'acronyme signifie « Ilots Regroupés pour l'Information Statistique ». Leur taille est de 2000 habitants par unité.
+[^1]: Irises are a statistical zoning of INSEE whose acronym stands for "Grouped Islands for Statistical Information". Their size is around 2000 inhabitants per unit.
 
 ```{r, eval=TRUE,cache=FALSE}
 library(sf)
@@ -417,7 +434,7 @@ iris.75 <- st_read("data/iris_75.shp", stringsAsFactors = F)
 ```
 ##
 
-Comptons par iris le nombre de personnes accidentées (`nbacc`) ;
+Let us count by iris the number of people injured ('nbacc');
 
 ```{r, eval=TRUE, fig.height=5}
 acc_iris <- iris.75 |> st_join(accidents.2019.paris) |> 
@@ -436,7 +453,7 @@ head(acc_iris,1)
 
 ##
 
-### Cartes avec ronds proportionnels
+### Proportional symbols
 
 ```{r, fig.height=4.75, cache=FALSE}
 #| code-fold: !expr code_folding
@@ -461,7 +478,7 @@ ggplot() +
 
 ## 
 
-### Cartes choroplèthes
+### Choropleth maps
 
 ```{r, fig.height=4.75, cache=FALSE}
 #| code-fold: !expr code_folding
@@ -494,9 +511,9 @@ ggplot() +
 ```
 
 
-## Carte avec `mapsf`
+## `mapsf`
 
-Ci-dessous un exemple de carte similaire réalisée avec la syntaxe de la librairie `mapsf`
+One example with `mapsf`
 
 ```{r, fig.height=4.75, warning=FALSE, message=FALSE}
 #| code-fold: !expr code_folding
@@ -528,168 +545,15 @@ mf_layout(
 ```
 
 
-<!-- # Un exemple de traitement géomatique avancé -->
+# Go further
 
-<!-- L'objectif de ce traitement est de compter le nombre d'accidents par tronçons de 100m sur le périphérique parisien. -->
-
-<!-- Pour commencer, nous allons extraire des données OSM le squelette du périphérique. Pour ce faire nous allons filtrer le data.frame `roads` à partir d'une liste de noms. Nous aurions pu nous servir d'une petite carte interactive pour trouver cette sélection. -->
-
-<!-- ```{r} -->
-
-<!-- library(dplyr) -->
-<!-- library(sf) -->
-<!-- library(tidygraph) # equivalent dplyr pour les graphes -->
-<!-- library(sfnetworks) # sf + graphes -->
-<!-- library(ggplot2) -->
-
-<!-- # A partir de roads, on garde les routes qui correspondent au périphérique -->
-<!-- periph_simple <- roads |>  -->
-<!--   filter(!is.na(name))|>  -->
-<!--   filter(name %in% c("Boulevard Périphérique Intérieur", "Pont Masséna", -->
-<!--                      "Tunnel Lilas","Pont Amont","Pont Aval")) |>  -->
-<!--   select(name) -->
-
-<!-- plot(periph_simple |> st_geometry(), -->
-<!--      col=1:nrow(periph_simple),lwd=4) -->
-<!-- ``` -->
-
-<!-- C'est un bon début, mais il reste un certains nombre de problèmes : -->
-
-<!-- - Les lignes extraites ne font pas 100m ; -->
-<!-- - Il reste les deux voies parallèles au niveau des tunnels -->
-
-
-<!-- Pour résoudre ces problèmes, nous allons nous servir de la librairie `sfnetwork`. Elle permet de marier des objets `sf` avec une description de leur topologie sous forme de graphe et elle s'appuie pour cela sur la librairie `tidygraph`. Cette description va nous être bien utile pour fusionner toute les lignes qui se touchent en une grande ligne. Commençons par transformer notre data.frame de lignes en un réseau spatial : -->
-
-<!-- ```{r} -->
-<!-- # sfnetwork permet de gérer les réseaux géospatiaux. -->
-<!-- # On transforme periph_simple en ce type d'objet -->
-<!-- net  = as_sfnetwork(st_geometry(periph_simple)) -->
-<!-- plot(net) -->
-<!-- ``` -->
-
-<!-- Nous allons maintenant pouvoir supprimer de ce réseau les noeuds inutiles i.e. ceux qui n'ont que deux voisins : -->
-
-<!-- ```{r} -->
-<!-- # to_spatial_smooth : on enlève les pseudos-noeuds en  -->
-<!-- # préservant la connectivité du réseau -->
-<!-- nets = convert(net,to_spatial_smooth) -->
-<!-- plot(nets) -->
-<!-- ``` -->
-<!-- Cela commence à ressembler à quelque chose. Mais il reste encore quelques liens isolés : -->
-
-<!-- ```{r} -->
-<!-- plot(nets  |>  -->
-<!--        activate(edges) |> -->
-<!--        filter(st_length(x)<units::as_units(1000,"m")) -->
-<!--      ) -->
-<!-- ``` -->
-<!-- Pour les supprimer, nous allons calculer la longueur de chaque lien et ne conserver que ceux qui nous permettent de construire une voie continue autour du périphérique : -->
-
-<!-- ```{r} -->
-<!-- # On calcule la longueur des edges, on trie par ordre décroissant -->
-<!-- nets = nets |>  -->
-<!--   activate(edges) |> #on travaille sur les liens (et non les noeuds) -->
-<!--   mutate(length=st_length(x)) |>  -->
-<!--   arrange(desc(length)) |>  -->
-<!--   mutate(lid=1:n()) |>  -->
-<!--   filter(lid %in% c(1,2,3,5)) #je ne garde que les grands accès -->
-<!-- nets = nets |>  -->
-<!--   activate(nodes) |>  -->
-<!--   mutate(deg=centrality_degree()) |>  -->
-<!--   filter(deg!=0) -->
-<!-- nets -->
-<!-- plot(nets) -->
-<!-- ``` -->
-
-<!-- Nous pouvons maintenant récupérer uniquement la géométrie des liens du réseau, et construire une ligne unique couvrant tout le périphérique : -->
-
-<!-- ```{r} -->
-<!-- #On transforme le tout en lignes -->
-<!-- lines.geom = nets |> activate(edges) |> st_geometry() -->
-<!-- points_ordered = lines.geom[c(2,1,3)] |> st_cast("POINT") -->
-<!-- points_ordered = c(points_ordered,points_ordered[1]) -->
-<!-- line.geom = points_ordered |> st_combine() |> st_cast("LINESTRING") -->
-<!-- line = st_as_sf(line.geom,id=1) -->
-<!-- plot(line) -->
-<!-- ``` -->
-
-<!-- Il reste a découper cette longue ligne en tronçons de 500m. Pour cela, nous allons commencer par créer un ensemble de points distants de 500m le long de la ligne et uniformiser l’échantillonnage de la ligne : -->
-
-<!-- ```{r} -->
-<!-- # On prend une ligne et on met un point tous les 100 mètres -->
-<!-- points_eqd = line.geom  |> st_line_sample(density = 1/10) |> -->
-<!--   st_cast("POINT") -->
-<!-- lines_eqd = line.geom  |> st_line_sample(density = 1/10) |> -->
-<!--   st_cast("LINESTRING") -->
-<!-- split_points = points_eqd[seq(1,length(points_eqd),by=50)] -->
-<!-- plot(points_eqd,pch=20,cex=0.2) -->
-<!-- ``` -->
-
-<!-- Ceci va nous permettre de découper la ligne en tronçons de taille identique : -->
-
-<!-- ```{r} -->
-<!-- # Je découpe ma ligne avec mes points -->
-<!-- troncons.col = lwgeom::st_split(lines_eqd,split_points) -->
-<!-- troncons.geom = st_collection_extract(troncons.col,type = "LINESTRING") -->
-<!-- troncons = st_sf(troncons.geom,id=1:length(troncons.geom)) -->
-<!-- plot(troncons) -->
-<!-- st_length(troncons) -->
-<!-- ``` -->
-
-<!-- Le plus dur est fait. Il ne reste plus qu'à compter et à faire une carte :). Notez le `endCapStyle` sur le `st_buffer` pour ne pas rajouter de marge aux deux extrémités des tronçons : -->
-
-<!-- ```{r} -->
-<!-- # On fait la jointure avec les accidents -->
-<!-- periph_count= troncons  |> st_buffer(100,endCapStyle = 'FLAT') |>  -->
-<!--   st_join(accidents.2019.paris |> filter(!duplicated(Num_Acc))) |>  -->
-<!--   filter(!is.na(Num_Acc)) |>  -->
-<!--   count(id) -->
-
-<!-- # On met la bonne géométrie à periph_count -->
-<!-- st_geometry(periph_count)=troncons.geom[match(periph_count$id,troncons$id)] -->
-
-<!-- # On fait une carte -->
-<!-- ggplot(periph_count) +  -->
-<!--   #ggspatial::annotation_map_tile(zoom=13,type="stamenbw") +  -->
-<!--   geom_sf(data=roads.geom, colour = "#666666",size=0.5)+ -->
-<!--   geom_sf(aes(color=n),size=3)+ -->
-<!--   scale_color_distiller("",palette = "Reds",direction=1)+ -->
-<!--   coord_sf(crs = 2154, datum = NA) + -->
-<!--   theme_minimal() + -->
-<!--   theme(panel.background = element_rect(fill = "white",color=NA), -->
-<!--         plot.background = element_rect(fill = "white",color=NA)) + -->
-<!--   labs(title = "Nombre de personnes accidentées sur le périphérique", -->
-<!--        subtitle = "en 2019, par portion de 500m", -->
-<!--        caption = "fichier BAAC 2019, ONISR\nantuki & comeetie, 2023",x="",y="") -->
-
-<!-- ``` -->
-
-# Pour aller plus loin
-
-## Lissage spatial
-
-avec le package `btb`
-
-```{r, fig.height=4.75, cache=FALSE}
-pts <- accidents.2019.paris |>
-  dplyr::mutate(nb_acc = 1) |>
-  dplyr::select(nb_acc)
-smooth_result <- btb::btb_smooth(pts = pts,
-                              sEPSG = 2154,
-                              iCellSize = 50, 
-                              iBandwidth = 800)
-plot(smooth_result |> dplyr::select(nb_acc), border=NA)
-```
-
-
-## Données raster
+## Raster 
 
 - [`stars`](https://github.com/r-spatial/stars/) et [`terra`](https://github.com/rspatial/terra) 
 
 ![](https://raw.githubusercontent.com/r-spatial/stars/master/images/cube1.png)
 
-## Géocodage
+## Geocoding
 
 - [`banR`](https://github.com/joelgombin/banR) et [`tidygeocoder`](https://github.com/jessecambon/tidygeocoder)
 
@@ -713,7 +577,7 @@ lat_longs
 ```
 
 
-## Données OSM
+## OSM data
 
 - [`osmdata`](https://github.com/ropensci/osmdata)
 
@@ -735,7 +599,7 @@ plot(roads$osm_lines |> dplyr::filter(highway=="living_street" ) |> st_geometry(
 ```
 
 
-## Réseaux linéaires et graphes
+## networks 
 
 - [`sfnetworks`](https://luukvdmeer.github.io/sfnetworks/) et [`tidygraph`](https://tidygraph.data-imaginist.com/index.html)
 
@@ -748,7 +612,7 @@ plot(net|>activate("nodes")|>st_geometry(),col="red", cex = 0.2,add=TRUE)
 ```
 
 
-## Cartographie interactive
+## inetractive webmaping with deck.gl
 
 - [`mapdeck`](https://github.com/SymbolixAU/mapdeck)
 
@@ -776,14 +640,12 @@ plot(net|>activate("nodes")|>st_geometry(),col="red", cex = 0.2,add=TRUE)
 - Spatial regression  
 - Ecological analysis  
 
-# <small> Crédits et reproductibilité</small> 
+# <small> Credits</small> 
 
-Cette formation s'inspire, ainsi que son tutoriel, d'une [précédente formation](https://github.com/comeetie/satRday) donnée par les mêmes auteurs avec Timothée Giraud. 
+This training is inspired, as well as its tutorial, by a [previous] training(https://github.com/comeetie/satRday) given by me and Kim Antunez and Timothée Giraud.
 
 
-##
-
-Partage de la configuration de R et des packages utilisés :
+# <small> Session infos</small> 
 
 ```{r}
 sessionInfo()
