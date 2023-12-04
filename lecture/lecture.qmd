@@ -622,6 +622,8 @@ plot(net|>activate("nodes")|>st_geometry(),col="red", cex = 0.2,add=TRUE)
 
 ## Ressources 
 
+- [geocomputation with R](https://r.geocompx.org/spatial-operations)
+
 - [rspatial](https://r-spatial.org/)
 
 - [CRAN task views](https://cran.r-project.org/web/views/) permet d'avoir des informations sur les packages du CRAN pertinents pour des tâches reliées à certains sujets. 
