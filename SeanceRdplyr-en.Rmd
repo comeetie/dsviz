@@ -1,7 +1,7 @@
 ---
 title: "Data Science and visualization</br> R and dplyr"
 author: "Etienne Côme"
-date: "9 Novembre 2023"
+date: "17 Octobre 2024"
 output:
   revealjs::revealjs_presentation:
     theme: white
