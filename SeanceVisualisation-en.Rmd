@@ -1,7 +1,7 @@
 ---
 title: "Visualisation with ggplot"
 author: "Etienne Côme"
-date: "October, 26 2020"
+date: "October, 29 2024"
 output:
   revealjs::revealjs_presentation:
     theme: white
@@ -251,13 +251,18 @@ ggplot(data=m_cty_ordered)+
 ##
 <h1>Vélib' data :</h1>
 ```{r, echo=TRUE, message=FALSE,fig.height=5}
-url="http://vlsstats.ifsttar.fr/data/temporalstats_Velib2018.json"
+url="./data/sp_Lyon.json"
+library(dplyr)
 # read some data
 data=fromJSON(file=url)
 # to data.frame
-tempstats.list=lapply(data,function(x){
-  data.frame(time=x$'_id',nbbikes=x$value$total_available_bikes)})
-tempstats.df=do.call(rbind,tempstats.list)
+extract = function(x){
+  data.frame(id=x$'_id',
+             time= x$download_date,
+             nbbikes = x$available_bikes )
+  }
+st_tempstats.df=do.call(rbind,lapply(data,extract))
+tempstats.df=st_tempstats.df |> group_by(time) |> summarise(nbbikes = sum(nbbikes))
 ```
 
 ## Time, natural order
@@ -390,6 +395,25 @@ svg.selectAll("text").data([5, 25, 50]).enter().append("text").attr("x",function
 </script>
 
 
+## 
+<h1> More complex graphics</h1>
+https://www.data-to-viz.com/
+
+ex: More than 3 continuous variables ?
+
+
+## 
+<h1> More complex graphics</h1>
+https://www.data-to-viz.com/
+
+ex: More than 3 continuous variables ?
+
+
+## 
+<h1> More complex graphics</h1>
+https://www.data-to-viz.com/
+
+ex: Multimodal distributions ?
 
 ##
 <h1>Principle :</h1>
@@ -673,6 +697,7 @@ ggplot(mpg,aes(y=cty,x=hwy))+
 ## Sources
 
 <ul>
+<li> https://github.com/rfordatascience/tidytuesday
 <li> https://www.r-graph-gallery.com/index.html
 <li> http://www.cis.umassd.edu/~dkoop/cis467
 <li> https://www.namwkim.org/datavis
