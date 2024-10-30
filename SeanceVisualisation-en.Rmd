@@ -245,7 +245,7 @@ ggplot(data=m_cty_ordered)+
 ```
 
 ##
-<h1> The ligne : </h1>
+<h1> The line : </h1>
 <h1> <span class="green"> 1 numeric variable </span></h1> <h1>with respect</h1><h1> <span class="purple"> to time</span></h1>
 
 ##
@@ -394,26 +394,60 @@ svg.selectAll("circle").data([5, 25, 50]).enter().append("circle").attr("cx",fun
 svg.selectAll("text").data([5, 25, 50]).enter().append("text").attr("x",function(d,i){return 20+i*100}).attr("y",125).text(function(d){return d})
 </script>
 
+## Color scales
+https://colorbrewer2.org
 
-## 
-<h1> More complex graphics</h1>
+<img src="./images/choro.jpeg" height="400px">
+
+color scheme + discretisation 
+
+## Color scales
+https://colorbrewer2.org
+
+<img src="./images/hcl.png" height="400px">
+
+color scheme + interpolation (! color space)
+
+
+
+## More complex graphics
 https://www.data-to-viz.com/
 
 ex: More than 3 continuous variables ?
 
 
-## 
-<h1> More complex graphics</h1>
+## More complex graphics
 https://www.data-to-viz.com/
 
 ex: More than 3 continuous variables ?
 
+<img src="./images/parallel.png" height="400px">
 
-## 
-<h1> More complex graphics</h1>
+Parallel plot
+
+
+## More complex graphics
 https://www.data-to-viz.com/
 
 ex: Multimodal distributions ?
+
+## More complex graphics
+https://www.data-to-viz.com/
+
+ex: Multimodal distributions ?
+
+<img src="./images/violin.png" height="400px">
+
+Violin plot
+
+## {data-background=#ffffff}
+<img src="./images/choisir-un-graphique.png" height=600>
+
+
+## {background-image="./images/tufteP.jpg" background-opacity="0.2"}
+<h2 class="r-fit-text mhead">Tufte</h2>
+<h2 class="r-fit-text mhead">Data-ink ratio</h2>
+<h2 class="r-fit-text mhead">Lying factor</h2>
 
 ##
 <h1>Principle :</h1>
@@ -557,9 +591,9 @@ ex : average, coounting, regression
 <ul>
 <li> add several layers 
 <li> with their own visual encoding and possibly their own data
-<li> (+ optionel) add statistical transformation
-<li> (+ optionel) change scale options
-<li> (+ optionel) specify title, theme, guides, style ...
+<li> (+ optional) add statistical transformation
+<li> (+ optional) change scale options
+<li> (+ optional) specify title, theme, guides, style ...
 </ul>
 <br><br>
 <h4 class="red">! data = tidy data.frame with the right feature types</h4>
@@ -632,8 +666,7 @@ ggplot(mpg,aes(x=cty,y=hwy,color=manufacturer,shape=factor(cyl)))+
 <h1><span class="green">Colors</span> <br><span class="orange"></span><br> <span class="purple">scales</span></h1>
 
 
-## Color scales
-<a href="http://colorbrewer2.org/"><h1>http://colorbrewer2.org/</h1></a>
+
 
 
 
