@@ -47,8 +47,8 @@ In this data analysis project, students will delve into the ridership data of Î
 
 Example of tools :
 
-- Allow the user to select a reference period and a period to compare against and provide meaningfull figures to highlight the differences between the two selected periods, discriminating by day of week.
-- Allow the user to quickly select a stations of interest with a webnmap and procides key statistics about the current trend for this stations.
+- Allow the user to select a reference period and a period to compare against and provide meaningful figures to highlight the differences between the two selected periods, discriminating by day of week.
+- Allow the user to quickly select a stations of interest with a webmap and provides key statistics about the current trend for this stations.
 
 ### 6. Statistical Methods
 
