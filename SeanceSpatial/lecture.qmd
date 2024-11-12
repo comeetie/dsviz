@@ -68,18 +68,28 @@ package.check <- lapply(
 
 <img src="img/sf.png" alt="format sf" width="100%">
 
+geographical vector primitive 
+
+- point(s) / line(s) / polygons(s) / multi-*
+- leverage well known text format (wkt) / well known binary (wkb)
+
+
 
 ## Read / write data
 
 Read
 
-Main formats shp, geojson, kml,...
+Main formats shp, geojson, kml, geopkg, topojson...
 
 ```{r, echo = TRUE, comments = FALSE}
 library(sf)
 mtq <- read_sf("data/mtq/martinique.shp")
 mtq <- st_read("data/mtq/martinique.shp")
 ```
+
+Some more info on geographical file format.
+
++ note geoparquet (geoarrow package)
 
 ## Read / write data
 
@@ -102,6 +112,9 @@ Projections/coordinate systems are listed using a code called an epsg code:
 - Lambert 93 : 2154 [https://epsg.io/2154](https://epsg.io/2154)
 - Pseudo-Mercator : 3857 [https://epsg.io/3857](https://epsg.io/3857)
 - Lambert azimuthal equal area : 3035 [https://epsg.io/3035](https://epsg.io/3035)
+
+
+Un-projected / Projected / 2D / 3D / ...
 
 ## Projection 
 
