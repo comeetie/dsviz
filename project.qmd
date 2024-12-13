@@ -64,6 +64,7 @@ Example of tools :
 
 - Deploy the Shiny dashboard on shinyapp.io for accessibility and user interaction.
 - Ensure the application is user-friendly and capable of providing dynamic insights into ridership patterns.
+- In case of troubles with too heavy data files, you may load them by year and / or work with a subset (last two years for examples). 
 
 ## Deliverables
 
@@ -74,7 +75,8 @@ Example of tools :
 
 ## Dead line
 
-8 January 2025 by e-mail 
+8 January 2025 by e-mail at etienne.come[at]univ-eiffel.fr !!
+
 
 ## Group Size
 
