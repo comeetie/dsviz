@@ -20,7 +20,7 @@ In this data analysis project, students will delve into the ridership data of Î
 ### 1. Data Collection and Cleaning
 
 - The data that you will use for this study are available trought  the STIF open data portal :
-    - [validation per day and stop point first semester of 2025](https://data.iledefrance-mobilites.fr/explore/dataset/validations-reseau-ferre-nombre-validations-par-jour-1er-trimestre/information/), [validation per day and stop point first semester of 2025](https://data.iledefrance-mobilites.fr/explore/dataset/validations-reseau-ferre-nombre-validations-par-jour-2eme-trimestre/information/)
+    - [validation per day and stop point first semester of 2025](https://data.iledefrance-mobilites.fr/explore/dataset/validations-reseau-ferre-nombre-validations-par-jour-1er-trimestre/information/), [validation per day and stop point second semester of 2025](https://data.iledefrance-mobilites.fr/explore/dataset/validations-reseau-ferre-nombre-validations-par-jour-2eme-trimestre/information/)
     - [validation per day and stop point 2015 - 2024](https://data.iledefrance-mobilites.fr/explore/dataset/histo-validations-reseau-ferre/information/)
     - [stops i.e "Zone d'arrêt" locations](https://data.iledefrance-mobilites.fr/explore/dataset/zones-d-arrets/information/?disjunctive.zdatype), for this last file the spatial data file can be downloaded directly at [https://eu.ftp.opendatasoft.com/stif/Reflex/REF_ZdA.zip](https://eu.ftp.opendatasoft.com/stif/Reflex/REF_ZdA.zip)
     - other ressources from stif open data website
@@ -65,7 +65,6 @@ Example of tools :
 - Include insights into how the railway network's ridership has evolved over the studied period.
 
 
-
 ## Deliverables
 
 - A commented R script that collect all the cleaning / preprocessing steps that were developed
@@ -75,7 +74,9 @@ Example of tools :
 
 ## Dead line
 
-8 January 2026 by e-mail 
+8 January 2026 by e-mail at etienne.come[at]univ-eiffel.fr !!
+
+
 
 ## Group Size
 
