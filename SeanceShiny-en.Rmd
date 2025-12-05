@@ -1,7 +1,7 @@
 ---
 title: "Visualisation, </br>Shiny"
 author: "Etienne Côme"
-date: "9 Novembre 2023"
+date: "December 5, 2025"
 output:
   revealjs::revealjs_presentation:
     theme: white
@@ -138,21 +138,24 @@ observe({
 ```
 
 
-## <span class="red">Server, advanced reactivity</span>
-Execute a block conditional to a specified list of inputs change
-```{r, eval=FALSE,echo=TRUE}
-data = eventReactive(input,{})
-data()
-observeEvent(input,{}})
-```
-
 
 ## <span class="red">Server, advanced reactivity</span>
 Deploy :
 
-- shinyapp.io -> account creation
+- shinyapps.io -> account creation
 - button publish document
 - get key and secret
+
+
+
+
+## <span class="red">Server, advanced reactivity</span>
+Data storage :
+
 - package the data needed by the app in an Rdata file in the app folder 
-- use the load functio to load Rdata files
+- use the load function to load Rdata files
+
+Even best use the arrow package and store data as parquet files :
+
+https://arrow.apache.org/docs/r/articles/dataset.html
 
