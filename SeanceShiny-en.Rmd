@@ -142,7 +142,7 @@ observe({
 ## <span class="red">Server, advanced reactivity</span>
 Deploy :
 
-- shinyapps.io -> account creation
+- shinyapps.io or connect.posit.cloud -> account creation
 - button publish document
 - get key and secret
 
