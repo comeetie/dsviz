@@ -1,7 +1,7 @@
 ---
 title: "Data Science and visualisation : introduction"
 author: "Etienne Côme"
-date: "October 17, 2024"
+date: "October 28, 2026"
 output:
   revealjs::revealjs_presentation:
     theme: white
@@ -130,6 +130,25 @@ Graphics, Data visualization, Maps...
 <li> ggplot and grammar of graphics </li>
 <li> spatial data </li>
 <li> introduction to cartography </li>
+<li> Dashboard (shiny)
+</ul>
+
+
+## Assessment
+
+<ul>
+<li>1 written exam</li>
+<li>1 open project</li>
+<li>LLM usage policy for the project</li>
+</ul>
+
+## AI tools -- usage policy for the project
+
+<ul>
+<li><b>Authorized use</b>: help with code, documentation, ideation </li>
+<li><b>Public discussions</b>: share the links to your LLM conversations ;</br> <b>their evaluation is part of the final grade</b></li>
+<li><b>Responsibility</b>: the student remains the author of the final deliverable</li>
+<li><b>No AI</b>: choosing not to use AI is perfectly fine ; </br><b>in case of doubt about the deliverable, oral defense via Zoom</b>
 </ul>
 
 

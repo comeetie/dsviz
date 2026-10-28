@@ -1,7 +1,7 @@
 ---
 title: "Data Science et visualisation : introduction"
 author: "Etienne Côme"
-date: "22 Septembre 2020"
+date: "28 Septembre 2026"
 output:
   revealjs::revealjs_presentation:
     theme: white
@@ -129,6 +129,25 @@ Graphiques, Data visualisation, Cartes...
 <li>introduction à la cartographie </li>
 </ul>
 
+
+## Évaluation
+
+<ul>
+<li>1 devoir sur table</li>
+<li>1 projet ouvert</li>
+<li>politique d'usage des LLM pour le projet</li>
+</ul>
+
+## Outils IA -- politique d'usage pour le projet
+
+<ul>
+<li><b>Usage autorisé</b> : aide au code, à la documentation, à l'idéation -- pas de génération de résultats finaux sans vérification humaine</li>
+<li><b>Discussions publiques</b> : fournir les liens de partage des échanges avec le LLM ; leur évaluation fait partie de la note finale</li>
+<li><b>Modèle</b> : Claude Sonnet comme référence ; Gemini ou GPT acceptés en version gratuite</li>
+<li><b>Validation des résultats</b> : tout résultat obtenu avec l'aide d'un LLM doit être testé avant d'être retenu</li>
+<li><b>Responsabilité</b> : l'étudiant reste l'auteur du rendu final</li>
+<li><b>Sans IA</b> : ne pas utiliser d’IA est tout à fait possible ; en cas de doute sur le rendu, soutenance orale par Zoom</li>
+</ul>
 
 
 
