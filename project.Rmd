@@ -1,0 +1,123 @@
+---
+title: "Project"
+author: "Etienne Côme"
+date: "November, 6 2026"
+output:
+  revealjs::revealjs_presentation:
+    theme: white
+    transition: none
+    self_contained: true
+    css: slides_project.css
+  beamer_presentation:
+    toc: false
+    incremental: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## The project
+
+<h3>Hackathon Mobilités 2026 -- Spécial Dataviz'</h3>
+
+
+- Use <a href="https://data.iledefrance-mobilites.fr/explore/?disjunctive.theme&disjunctive.keyword&disjunctive.publisher&disjunctive.modified&disjunctive.features&disjunctive.language&sort=modified">data</a> and data visualisation to explore mobility questions in Île-de-France
+- optional data repository (<a href="https://opendata.paris.fr/">open data Paris</a> and <a href="http://wwW.insee.fr">Insee</a>)
+- 4 ex questions but you may find another 
+- Goal: build visualisations / dashboard that answer a question and could become tools for users or mobility stakeholders
+
+
+## Challenge #1 -- Mobility and climate adaptation
+
+*Explore the data to understand how heat influences mobility, and give keys to help adapt mobility to climate change.*
+
+<ul>
+<li>Did Franciliens stay home more during the heat waves?</li>
+<li>Did they use their car more?</li>
+<li>Was the transport supply impacted?</li>
+</ul>
+Use case : 2026 Heatwaves.
+
+## Challenge #2 -- Mobility and employment
+
+*Explore the link between mobility and access to employment, and analyse to what extent transport networks meet the needs.*
+
+<ul>
+<li>How do public transport networks make it possible to reach the places where jobs are created and concentrated?</li>
+</ul>
+
+## Challenge #3 -- Mobility and impacts on territories
+
+*Use data visualisation to assess the impact of line extensions already completed, and to anticipate or question future transformations of territories.*
+
+<ul>
+<li>How do territories change with these new services?</li>
+<li>What was the impact on bus trips in these territories?</li>
+</ul>
+
+Use case : Line 14.
+
+## Challenge #4 -- Mobility and inequalities
+
+*Make visible, thanks to data, mobility inequalities related to gender, income and place of residence, and imagine representations that inspire more inclusive policies.*
+
+<ul>
+<li>Is everyday mobility designed for the diversity of life paths?</li>
+<li>How does gender influence travel practices, access to services and facilities, and mobility constraints?</li>
+<li>How can we picture more inclusive and more equitable networks?</li>
+</ul>
+
+## Assessment
+
+<ul>
+<li>1 written exam</li>
+<li>1 open project (IDFM hackathon subject)</li>
+<li>LLM usage policy for the project</li>
+</ul>
+
+## AI tools -- usage policy for the project
+
+<ul>
+<li><b>Authorized use</b>: help with code, documentation, ideation -- not for generating final results without human verification</li>
+<li><b>Public discussions</b>: share the links to your LLM conversations ; their evaluation is part of the final grade</li>
+<li><b>Model</b>: Claude Sonnet as the reference model ; Gemini or GPT accepted in their free version</li>
+</ul>
+
+
+## AI tools -- usage policy for the project
+
+<ul>
+<li><b>Responsibility</b>: the student remains the author of the final deliverable</li>
+<li><b>Result validation</b>: any result obtained with the help of an LLM must be tested before being kept</li>
+<li><b>No AI</b>: choosing not to use AI is perfectly fine ; in case of doubt about the deliverable, oral defense via Zoom</li>
+</ul>
+
+
+## Evaluating the chats -- possible grid (1/2)
+
+<ul>
+<li><b>Prompting quality</b>: clear questions, context given (data, goal, constraints), logical iterations rather than scattered attempts</li>
+<li><b>Critical thinking</b>: challenges the answers, spots errors and approximations, reformulates instead of copy-pasting</li>
+<li><b>Relevance of use</b>: the LLM is used where it adds value (unblocking, exploring ideas), not to avoid thinking ; the student's own contribution is visible</li>
+</ul>
+
+## Evaluating the chats -- possible grid (2/2)
+
+<ul>
+<li><b>Validation</b>: code is run, numbers and charts are checked against the data</li>
+<li><b>Transparency and consistency</b>: complete conversations (no truncated or selective links), consistent with the final deliverable</li>
+</ul>
+
+## Deliverable 
+Groups of 4 students :
+
+<ul>
+<li> (shiny) dashboard </li>
+<li> R code (github repos)
+<li> report</li>
+<li> +LLM discussions links</li>
+</ul>
+
+
+
