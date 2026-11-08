@@ -37,7 +37,7 @@ knitr::opts_chunk$set(echo = FALSE)
 <li>Did they use their car more?</li>
 <li>Was the transport supply impacted?</li>
 </ul>
-Use case : 2026 Heatwaves.
+Use case : 2025,2026 Heatwaves.
 
 ## Challenge #2 -- Mobility and employment
 
@@ -45,7 +45,7 @@ Use case : 2026 Heatwaves.
 
 <ul>
 <li>How do public transport networks make it possible to reach the places where jobs are created and concentrated?</li>
-</ul>
+</ul>libuv1-dev 
 
 ## Challenge #3 -- Mobility and impacts on territories
 
@@ -60,13 +60,13 @@ Use case : Line 14.
 
 ## Challenge #4 -- Mobility and inequalities
 
-*Make visible, thanks to data, mobility inequalities related to gender, income and place of residence, and imagine representations that inspire more inclusive policies.*
+*Make visible, thanks to data, mobility inequalities related to gender, income, age,.... and imagine representations that inspire more inclusive policies.*
 
 <ul>
-<li>Is everyday mobility designed for the diversity of life paths?</li>
-<li>How does gender influence travel practices, access to services and facilities, and mobility constraints?</li>
-<li>How can we picture more inclusive and more equitable networks?</li>
+<li>How does age (students) influence travel practices, access to services and facilities, and mobility constraints?</li>
 </ul>
+
+Use case : Noisy-Champs
 
 ## Assessment
 
@@ -113,7 +113,7 @@ Use case : Line 14.
 Groups of 4 students :
 
 <ul>
-<li> (shiny) dashboard </li>
+<li> (shiny) dashboard (hosted on posit.cloud)</li>
 <li> R code (github repos)
 <li> report</li>
 <li> +LLM discussions links</li>
